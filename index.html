@@ -1079,6 +1079,12 @@
 .faq-item.active .faq-answer {
     padding: 0 26px 22px 26px;
 }
+/* Центрирование 4-й карточки услуг на десктопе */
+@media (min-width: 769px) {
+    .services-grid .service-card:last-child {
+        grid-column: 2;
+    }
+}
         /* Мобильная адаптация */
         @media (max-width: 768px) {
     body {
