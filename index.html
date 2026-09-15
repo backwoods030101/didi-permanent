@@ -1415,7 +1415,7 @@
             }
         }
 
-        async function submitQuiz() {
+       async function submitQuiz() {
     const nameInput = document.getElementById('quizName');
     const phoneInput = document.getElementById('quizPhone');
     const messenger = document.getElementById('quizMessenger').value;
@@ -1455,7 +1455,8 @@
 • Удобное время: ${answers.step_4 || 'Не выбрано'}`;
 
     try {
-        await fetch(`https://api.telegram.org/bot${TG_BOT_TOKEN}/sendMessage`, {
+        // Запрос отправляется через серверный прокси Netlify без блокировок операторов
+        await fetch(`/tg-api/bot${TG_BOT_TOKEN}/sendMessage`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -1467,7 +1468,7 @@
         console.warn('Ошибка при отправке в Telegram:', error);
     }
 
-    // Сброс кнопки и закрытие квиза
+    // Сброс кнопки и закрытие модалки
     submitBtn.innerText = originalText;
     submitBtn.disabled = false;
     closeQuiz();
