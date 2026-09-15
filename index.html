@@ -772,33 +772,36 @@
         }
 
         /* Квиз модальное окно */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(10, 4, 3, 0.88);
-            backdrop-filter: blur(12px);
-            z-index: 200;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(10, 4, 3, 0.88);
+    backdrop-filter: blur(12px);
+    z-index: 200;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    overflow-y: auto; /* Включает прокрутку для мобильных экранов */
+}
 
-        .modal.active { display: flex; }
+.modal.active { display: flex; }
 
-        .quiz-box {
-            background: #23120E;
-            max-width: 620px;
-            width: 100%;
-            border-radius: 24px;
-            overflow: hidden;
-            box-shadow: 0 25px 60px rgba(0,0,0,0.7);
-            position: relative;
-            border: 1px solid var(--glass-border);
-        }
+.quiz-box {
+    background: #23120E;
+    max-width: 620px;
+    width: 100%;
+    max-height: 90vh; /* Ограничивает высоту, чтобы окно влезало с клавиатурой */
+    overflow-y: auto;
+    border-radius: 24px;
+    box-shadow: 0 25px 60px rgba(0,0,0,0.7);
+    position: relative;
+    border: 1px solid var(--glass-border);
+    margin: auto;
+}
 
         .quiz-header {
             background: #170A07;
@@ -1330,7 +1333,7 @@
                                 <option value="Звонок">Звонок по телефону</option>
                             </select>
                         </div>
-                        <button type="submit" class="btn" style="width: 100%; margin-top: 10px;">Зафиксировать скидку 1000 ₽</button>
+                        <button type="button" id="submitBtn" class="btn" onclick="submitQuiz()" style="width: 100%; margin-top: 10px;">Зафиксировать скидку 1000 ₽</button>
                     </div>
 
                     <div class="quiz-footer">
@@ -1412,15 +1415,33 @@
             }
         }
 
-        document.getElementById('quizForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
+        async function submitQuiz() {
+    const nameInput = document.getElementById('quizName');
+    const phoneInput = document.getElementById('quizPhone');
+    const messenger = document.getElementById('quizMessenger').value;
+    const submitBtn = document.getElementById('submitBtn');
 
-            const name = document.getElementById('quizName').value;
-            const phone = document.getElementById('quizPhone').value;
-            const messenger = document.getElementById('quizMessenger').value;
+    const name = nameInput.value.trim();
+    const phone = phoneInput.value.trim();
 
-            // Формирование текста заявки для Telegram
-            const messageText = 
+    // Проверка заполнения полей
+    if (!name) {
+        alert('Пожалуйста, введите ваше имя');
+        nameInput.focus();
+        return;
+    }
+    if (!phone || phone.length < 6) {
+        alert('Пожалуйста, введите корректный номер телефона');
+        phoneInput.focus();
+        return;
+    }
+
+    // Блокировка кнопки на время отправки
+    const originalText = submitBtn.innerText;
+    submitBtn.innerText = "Отправка...";
+    submitBtn.disabled = true;
+
+    const messageText = 
 `🔥 НОВАЯ ЗАЯВКА — DIDI PERMANENT!
 
 👤 Имя: ${name}
@@ -1433,30 +1454,31 @@
 • Желаемый результат: ${answers.step_3 || 'Не выбрано'}
 • Удобное время: ${answers.step_4 || 'Не выбрано'}`;
 
-            // Отправка в Telegram
-            try {
-                await fetch(`https://api.telegram.org/bot${TG_BOT_TOKEN}/sendMessage`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        chat_id: TG_CHAT_ID,
-                        text: messageText
-                    })
-                });
-            } catch (err) {
-                console.error('Ошибка отправки в Telegram:', err);
-            }
-
-            // Уведомление клиенту
-            alert(`Спасибо, ${name}! Скидка 1000 ₽ зафиксирована за номером ${phone}. Скоро свяжемся с вами!`);
-            closeQuiz();
-
-            // Перенаправление в WhatsApp (если выбран этот способ)
-            if (messenger === 'WhatsApp' && MASTER_PHONE !== "79XXXXXXXXX") {
-                const waUrl = `https://wa.me/${MASTER_PHONE}?text=${encodeURIComponent(messageText)}`;
-                window.open(waUrl, '_blank');
-            }
+    try {
+        await fetch(`https://api.telegram.org/bot${TG_BOT_TOKEN}/sendMessage`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                chat_id: TG_CHAT_ID,
+                text: messageText
+            })
         });
+    } catch (error) {
+        console.warn('Ошибка при отправке в Telegram:', error);
+    }
+
+    // Сброс кнопки и закрытие квиза
+    submitBtn.innerText = originalText;
+    submitBtn.disabled = false;
+    closeQuiz();
+
+    alert(`Спасибо, ${name}! Скидка 1000 ₽ зафиксирована за номером ${phone}. Скоро свяжемся с вами!`);
+
+    // Переход в WhatsApp, если выбран
+    if (messenger === 'WhatsApp' && MASTER_PHONE !== "79XXXXXXXXX") {
+        window.location.href = `https://api.whatsapp.com/send?phone=${MASTER_PHONE}&text=${encodeURIComponent(messageText)}`;
+    }
+}
     </script>
 </body>
 </html>
