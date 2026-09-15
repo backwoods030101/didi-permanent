@@ -1,0 +1,1462 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Перманентный макияж в Чебоксарах | Диана Емельянова</title>
+    <meta name="description" content="Премиальный естественный перманентный макияж бровей и губ на органических пигментах. Чебоксары. Диана Емельянова.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-deep: #140907;
+            --text-light: #F7EFE6;
+            --text-muted: #C7B6A6;
+            --accent-gold: #D1AA74;
+            --accent-gold-hover: #E4C394;
+            --glass-bg: rgba(30, 16, 13, 0.58);
+            --glass-bg-hover: rgba(48, 26, 21, 0.75);
+            --glass-border: rgba(209, 170, 116, 0.3);
+            --glass-border-hover: rgba(209, 170, 116, 0.6);
+            --white: #FFFFFF;
+            --btn-grad: linear-gradient(135deg, #D1AA74 0%, #997143 100%);
+            --gold-grad: linear-gradient(135deg, #FFF3E3 0%, #D1AA74 100%);
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-color: var(--bg-deep);
+            background-image: 
+                radial-gradient(circle at 50% 15%, rgba(140, 85, 68, 0.28) 0%, transparent 60%),
+                radial-gradient(circle at 80% 50%, rgba(170, 105, 85, 0.22) 0%, transparent 50%),
+                radial-gradient(circle at 20% 85%, rgba(130, 78, 62, 0.25) 0%, transparent 60%),
+                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 1800" width="100%" height="100%" preserveAspectRatio="none"><defs><linearGradient id="silkG1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%23140907"/><stop offset="30%" stop-color="%233a1e17"/><stop offset="50%" stop-color="%23683a2d"/><stop offset="70%" stop-color="%2322100c"/><stop offset="100%" stop-color="%230e0504"/></linearGradient><linearGradient id="silkG2" x1="100%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="%230e0504"/><stop offset="35%" stop-color="%2348251c"/><stop offset="55%" stop-color="%237a4435"/><stop offset="80%" stop-color="%2328120e"/><stop offset="100%" stop-color="%23140907"/></linearGradient><linearGradient id="sheen" x1="0%" y1="50%" x2="100%" y2="50%"><stop offset="0%" stop-color="%23ffffff" stop-opacity="0"/><stop offset="50%" stop-color="%23ffffff" stop-opacity="0.12"/><stop offset="100%" stop-color="%23ffffff" stop-opacity="0"/></linearGradient></defs><path d="M0,0 C320,120 420,380 180,600 C-60,820 80,1150 400,1300 C720,1450 1100,1250 1440,1500 L1440,0 Z" fill="url(%23silkG1)"/><path d="M1440,300 C1100,200 900,550 1150,850 C1400,1150 1200,1550 800,1700 C500,1810 200,1750 0,1800 L1440,1800 Z" fill="url(%23silkG2)" opacity="0.85"/><path d="M0,450 Q450,250 720,650 T1440,850 L1440,1200 Q950,950 650,1400 T0,1650 Z" fill="url(%23sheen)"/></svg>'),
+                url('bg.jpg');
+            background-size: cover;
+            background-position: center top;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+        }
+
+        .container {
+            max-width: 1140px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .grad-text {
+            background: var(--gold-grad);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+
+        .gold-text {
+            color: var(--accent-gold);
+        }
+
+        /* Кнопка с золотым сиянием и бликом */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px 36px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 13px;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            color: #1a0907;
+            background: var(--btn-grad);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.35s ease;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6), 0 0 16px rgba(209, 170, 116, 0.35);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            background: linear-gradient(135deg, #E4C394 0%, #AA804E 100%);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.7), 0 0 25px rgba(209, 170, 116, 0.6);
+        }
+
+        .btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0) 100%);
+            transform: skewX(-25deg);
+            animation: flash 4s infinite;
+        }
+
+        @keyframes flash {
+            0%, 65% { left: -100%; }
+            100% { left: 200%; }
+        }
+
+        /* Шапка */
+        header {
+            padding: 20px 0;
+            background: rgba(20, 9, 7, 0.75);
+            backdrop-filter: blur(14px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .nav-wrap {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo h2 {
+            font-size: 17px;
+            font-weight: 800;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        .logo span {
+            font-size: 11px;
+            color: var(--accent-gold);
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            display: block;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-light);
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover { color: var(--accent-gold); }
+
+        .nav-contacts {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .social-btn {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            color: var(--text-light);
+            text-decoration: none;
+            backdrop-filter: blur(8px);
+            transition: all 0.3s ease;
+        }
+
+        .social-btn svg {
+            transition: transform 0.25s ease;
+        }
+
+        .social-btn:hover {
+            background: var(--accent-gold);
+            color: var(--bg-deep);
+            border-color: var(--accent-gold);
+            transform: translateY(-2px);
+            box-shadow: 0 0 14px rgba(209, 170, 116, 0.45);
+        }
+
+        .social-btn:hover svg {
+            transform: scale(1.1);
+        }
+
+        /* Первый экран */
+        .hero {
+            padding: 95px 0 85px;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.15fr 0.85fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(12px);
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--accent-gold);
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+        }
+
+        .hero-content h1 {
+            font-size: 44px;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 22px;
+            letter-spacing: -0.5px;
+        }
+
+        .hero-bullets {
+            list-style: none;
+            margin-bottom: 35px;
+        }
+
+        .hero-bullets li {
+            font-size: 15px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--text-light);
+        }
+
+        .hero-bullets li span {
+            color: var(--accent-gold);
+            font-size: 16px;
+        }
+
+        .hero-visual {
+            background: var(--glass-bg);
+            border-radius: 24px;
+            padding: 14px;
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(16px);
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.55);
+        }
+
+        .hero-visual-img {
+            width: 100%;
+            height: 410px;
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px dashed var(--glass-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            font-weight: 600;
+            font-size: 14px;
+            letter-spacing: 0.5px;
+        }
+
+        /* Преимущества */
+        .benefits {
+            padding: 95px 0;
+            border-top: 1px solid var(--glass-border);
+        }
+
+        .sec-title {
+            text-align: center;
+            margin-bottom: 55px;
+        }
+
+        .sec-title h2 {
+            font-size: 32px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 10px;
+        }
+
+        .sec-title p {
+            color: var(--text-muted);
+            font-size: 15px;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .benefit-card {
+            background: var(--glass-bg);
+            padding: 40px 30px;
+            border-radius: 20px;
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(12px);
+            transition: all 0.35s ease;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-5px);
+            background: var(--glass-bg-hover);
+            border-color: var(--glass-border-hover);
+            box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45);
+        }
+
+        .benefit-card h3 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--text-light);
+        }
+
+        .benefit-card p {
+            font-size: 14px;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* Услуги и цены */
+        .services {
+            padding: 95px 0;
+            border-top: 1px solid var(--glass-border);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 26px;
+        }
+
+        .service-card {
+            background: var(--glass-bg);
+            border-radius: 22px;
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(14px);
+            padding: 35px 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.35s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-6px);
+            background: var(--glass-bg-hover);
+            border-color: var(--glass-border-hover);
+            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.55);
+        }
+
+        .service-tag {
+            display: inline-block;
+            padding: 4px 14px;
+            border-radius: 12px;
+            background: rgba(209, 170, 116, 0.16);
+            color: var(--accent-gold);
+            border: 1px solid var(--glass-border);
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-bottom: 18px;
+        }
+
+        .service-card h3 {
+            font-size: 21px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--text-light);
+        }
+
+        .service-card p {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 28px;
+        }
+
+        .service-pricing {
+            display: flex;
+            align-items: baseline;
+            gap: 14px;
+            margin-bottom: 22px;
+        }
+
+        .price-current {
+            font-size: 30px;
+            font-weight: 800;
+            color: var(--text-light);
+        }
+
+        .price-discount {
+            font-size: 13px;
+            color: var(--accent-gold);
+            font-weight: 600;
+        }
+
+        /* Блок мастера */
+        .master {
+            padding: 100px 0;
+            border-top: 1px solid var(--glass-border);
+        }
+
+        .master-grid {
+            display: grid;
+            grid-template-columns: 0.9fr 1.1fr;
+            gap: 55px;
+            align-items: center;
+        }
+
+        .master-photo {
+            height: 460px;
+            border-radius: 24px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(12px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        .master-info h3 {
+            font-size: 36px;
+            font-weight: 800;
+            margin-bottom: 6px;
+            color: var(--text-light);
+        }
+
+        .master-info .role {
+            color: var(--accent-gold);
+            font-weight: 600;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 22px;
+            display: block;
+        }
+
+        .master-info p {
+            font-size: 15px;
+            color: var(--text-muted);
+            margin-bottom: 18px;
+        }
+
+        .sert-link {
+            display: inline-block;
+            color: var(--accent-gold);
+            font-weight: 600;
+            font-size: 14px;
+            text-decoration: underline;
+            margin-bottom: 28px;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .sert-link:hover { color: #FFF3E3; }
+
+        /* Портфолио */
+        .portfolio {
+            padding: 95px 0;
+            border-top: 1px solid var(--glass-border);
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 22px;
+            margin-bottom: 35px;
+        }
+
+        .portfolio-item {
+            height: 290px;
+            border-radius: 18px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-5px);
+            background: var(--glass-bg-hover);
+            border-color: var(--glass-border-hover);
+            box-shadow: 0 14px 28px rgba(0, 0, 0, 0.45);
+        }
+
+        /* Интерактивная плашка Instagram */
+        .insta-banner {
+            background: linear-gradient(135deg, rgba(38, 19, 15, 0.85) 0%, rgba(55, 20, 28, 0.65) 50%, rgba(20, 9, 7, 0.9) 100%);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 26px 36px;
+            backdrop-filter: blur(16px);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.5);
+            transition: all 0.35s ease;
+        }
+
+        .insta-banner:hover {
+            border-color: rgba(225, 48, 108, 0.5);
+            box-shadow: 0 24px 50px rgba(0, 0, 0, 0.65), 0 0 35px rgba(225, 48, 108, 0.2);
+            transform: translateY(-3px);
+        }
+
+        .insta-banner-glow {
+            position: absolute;
+            top: -70px;
+            right: -70px;
+            width: 220px;
+            height: 220px;
+            background: radial-gradient(circle, rgba(225, 48, 108, 0.28) 0%, rgba(209, 170, 116, 0.15) 50%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .insta-banner-content {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .insta-profile-block {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .insta-avatar-wrapper {
+            position: relative;
+            width: 62px;
+            height: 62px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .insta-story-ring {
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+            padding: 3px;
+            animation: ringRotate 6s linear infinite;
+        }
+
+        @keyframes ringRotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .insta-avatar {
+            position: relative;
+            width: 54px;
+            height: 54px;
+            border-radius: 50%;
+            background: #1e0f0c;
+            border: 3px solid #140907;
+            color: var(--accent-gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 800;
+            z-index: 1;
+        }
+
+        .insta-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .insta-name-row {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .insta-name {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text-light);
+        }
+
+        .insta-handle {
+            font-size: 14px;
+            color: var(--accent-gold);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+
+        .insta-handle:hover {
+            color: #FFF3E3;
+            text-decoration: underline;
+        }
+
+        .insta-highlights {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .insta-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 15px;
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            color: var(--text-light);
+            font-size: 12px;
+            font-weight: 500;
+            text-decoration: none;
+            backdrop-filter: blur(8px);
+            transition: all 0.25s ease;
+        }
+
+        .insta-pill:hover {
+            background: rgba(209, 170, 116, 0.22);
+            border-color: var(--accent-gold);
+            color: #FFF3E3;
+            transform: translateY(-2px);
+        }
+
+        .insta-action {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .insta-btn {
+            background: linear-gradient(135deg, #e1306c 0%, #D1AA74 100%);
+            color: #ffffff;
+            box-shadow: 0 8px 22px rgba(225, 48, 108, 0.32), 0 0 15px rgba(209, 170, 116, 0.3);
+            padding: 13px 26px;
+            font-size: 12px;
+        }
+
+        .insta-btn:hover {
+            background: linear-gradient(135deg, #fd1d1d 0%, #e1306c 50%, #D1AA74 100%);
+            box-shadow: 0 12px 28px rgba(225, 48, 108, 0.5), 0 0 22px rgba(209, 170, 116, 0.5);
+        }
+
+        .insta-subtext {
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        /* Отзывы */
+        .reviews {
+            padding: 95px 0;
+            border-top: 1px solid var(--glass-border);
+        }
+
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .review-card {
+            background: var(--glass-bg);
+            padding: 32px 26px;
+            border-radius: 20px;
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(12px);
+        }
+
+        .review-card p {
+            font-size: 14px;
+            color: var(--text-light);
+            font-style: italic;
+            margin-bottom: 18px;
+            line-height: 1.6;
+        }
+
+        .review-author {
+            font-weight: 700;
+            font-size: 13px;
+            color: var(--accent-gold);
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+
+        /* Плавающая кнопка записи */
+        .sticky-btn {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            z-index: 90;
+            padding: 14px 26px;
+            font-size: 12px;
+        }
+
+        /* Плашка Cookie */
+        .cookie-banner {
+            position: fixed;
+            bottom: 25px;
+            left: 25px;
+            max-width: 440px;
+            background: rgba(26, 12, 10, 0.94);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 16px 20px;
+            box-shadow: 0 18px 45px rgba(0, 0, 0, 0.65), 0 0 25px rgba(209, 170, 116, 0.15);
+            z-index: 95;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            opacity: 0;
+            transform: translateY(30px);
+            pointer-events: none;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .cookie-banner.show {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: all;
+        }
+
+        .cookie-text {
+            font-size: 12px;
+            color: var(--text-light);
+            line-height: 1.45;
+        }
+
+        .cookie-btn {
+            padding: 10px 22px !important;
+            font-size: 11px !important;
+            letter-spacing: 0.8px !important;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        /* Квиз модальное окно */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 4, 3, 0.88);
+            backdrop-filter: blur(12px);
+            z-index: 200;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal.active { display: flex; }
+
+        .quiz-box {
+            background: #23120E;
+            max-width: 620px;
+            width: 100%;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.7);
+            position: relative;
+            border: 1px solid var(--glass-border);
+        }
+
+        .quiz-header {
+            background: #170A07;
+            color: #FFFFFF;
+            padding: 20px 25px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .consultant-mini {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .consultant-avatar {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: var(--accent-gold);
+            color: #1a0907;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 800;
+        }
+
+        .quiz-body {
+            padding: 32px 26px;
+        }
+
+        .quiz-step { display: none; }
+        .quiz-step.active { display: block; }
+
+        .quiz-step h4 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--text-light);
+        }
+
+        .quiz-options {
+            display: grid;
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+
+        .quiz-option {
+            border: 1px solid var(--glass-border);
+            background: rgba(255, 255, 255, 0.04);
+            padding: 15px 20px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s;
+            color: var(--text-light);
+        }
+
+        .quiz-option:hover, .quiz-option.selected {
+            border-color: var(--accent-gold);
+            background: rgba(209, 170, 116, 0.18);
+            color: #FFF3E3;
+        }
+
+        .progress-bar {
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            margin-bottom: 22px;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            width: 20%;
+            background: var(--accent-gold);
+            transition: width 0.3s ease;
+        }
+
+        .quiz-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid var(--glass-border);
+            padding-top: 20px;
+        }
+
+        .btn-prev {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 13px;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 16px;
+            right: 20px;
+            background: transparent;
+            border: none;
+            color: var(--text-light);
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .form-group {
+            margin-bottom: 14px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: var(--text-light);
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 13px 15px;
+            border-radius: 10px;
+            border: 1px solid var(--glass-border);
+            background: rgba(0, 0, 0, 0.35);
+            font-family: inherit;
+            font-size: 14px;
+            color: var(--text-light);
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            border-color: var(--accent-gold);
+        }
+
+        /* Футер */
+        footer {
+            padding: 45px 0;
+            text-align: center;
+            border-top: 1px solid var(--glass-border);
+            font-size: 13px;
+            color: var(--text-muted);
+            background: rgba(16, 7, 5, 0.88);
+            backdrop-filter: blur(10px);
+        }
+
+        /* Мобильная адаптация */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hero-grid, .master-grid, .benefits-grid, .reviews-grid { grid-template-columns: 1fr; }
+            .hero-content h1 { font-size: 30px; }
+            .sec-title h2 { font-size: 24px; }
+            .hero-visual-img { height: 260px; }
+            .master-photo { height: 320px; }
+
+            .insta-banner { padding: 24px 20px; }
+            .insta-banner-content { flex-direction: column; align-items: flex-start; gap: 20px; }
+            .insta-action { width: 100%; }
+            .insta-btn { width: 100%; }
+
+            .cookie-banner {
+                left: 15px;
+                right: 15px;
+                bottom: 85px;
+                max-width: none;
+                flex-direction: column;
+                align-items: stretch;
+                text-align: center;
+                gap: 12px;
+            }
+            .cookie-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Шапка -->
+    <header>
+        <div class="container nav-wrap">
+            <div class="logo">
+                <h2>Диана Емельянова</h2>
+                <span>DIDI PERMANENT • Чебоксары</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#services">Услуги и цены</a></li>
+                <li><a href="#benefits">Преимущества</a></li>
+                <li><a href="#master">О мастере</a></li>
+                <li><a href="#portfolio">Работы</a></li>
+                <li><a href="#reviews">Отзывы</a></li>
+            </ul>
+            <div class="nav-contacts">
+                <!-- Telegram -->
+                <a href="https://t.me/didishkaaaaaaaaaa" target="_blank" rel="noopener noreferrer" class="social-btn" title="Telegram">
+                    <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.75-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .37z"/>
+                    </svg>
+                </a>
+                <!-- VK -->
+                <a href="https://vk.com/baaarbie" target="_blank" rel="noopener noreferrer" class="social-btn" title="ВКонтакте">
+                    <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M15.684 0H8.316C2.992 0 0 2.992 0 8.316v7.368C0 21.008 2.992 24 8.316 24h7.368C21.008 24 24 21.008 24 15.684V8.316C24 2.992 21.008 0 15.684 0zm4.004 17.228h-1.928c-.73 0-.954-.58-2.268-1.902-1.144-1.12-1.65-1.264-1.93-1.264-.392 0-.504.112-.504.646v1.748c0 .462-.15.772-1.358.772-2.002 0-4.228-1.218-5.794-3.486-2.366-3.374-3.038-5.908-3.038-6.426 0-.28.112-.546.644-.546h1.932c.49 0 .672.224.854.742 1.008 2.898 2.688 5.446 3.388 5.446.266 0 .392-.126.392-.812V10.15c-.084-1.274-.742-1.386-.742-1.834 0-.21.182-.42.476-.42h2.996c.406 0 .56.21.56.686v3.71c0 .406.182.546.308.546.252 0 .462-.14.938-.616 1.456-1.638 2.492-4.144 2.492-4.144.14-.28.378-.49.882-.49h1.932c.574 0 .7.294.574.84-.238 1.106-2.562 4.382-2.674 4.564-.238.378-.336.546 0 .994.238.336 1.022 1 1.54 1.61 1.022 1.19 1.82 2.184 2.03 2.87.224.672-.112.896-.644.896z"/>
+                    </svg>
+                </a>
+                <!-- Instagram -->
+                <a href="https://www.instagram.com/didi_permanent_/" target="_blank" rel="noopener noreferrer" class="social-btn" title="Instagram">
+                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                    </svg>
+                </a>
+                <button class="btn" onclick="openQuiz()" style="padding: 10px 22px; font-size: 12px;">Скидка 1000 ₽</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Первый экран -->
+    <section class="hero">
+        <div class="container hero-grid">
+            <div class="hero-content">
+                <div class="hero-badge">Знакомство с мастером</div>
+                <h1>Премиальный перманент в Чебоксарах со <span class="grad-text">скидкой 1000 ₽</span></h1>
+                <ul class="hero-bullets">
+                    <li><span>◆</span> <strong>Эстетика натуральности</strong> — мягкая пудровая растушевка без эффекта тату</li>
+                    <li><span>◆</span> <strong>Индивидуальная геометрия</strong> — форму и оттенок подбираем под черты лица</li>
+                    <li><span>◆</span> <strong>Абсолютный комфорт</strong> — премиальная двухэтапная анестезия</li>
+                </ul>
+                <button class="btn" onclick="openQuiz()">Рассчитать стоимость и забрать скидку</button>
+            </div>
+            <div class="hero-visual">
+                <div class="hero-visual-img">Фото мастера / Портфолио</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Преимущества -->
+    <section class="benefits" id="benefits">
+        <div class="container">
+            <div class="sec-title">
+                <h2><span class="grad-text">Преимущества перманента</span></h2>
+                <p>Безупречный образ и уверенность в себе каждый день</p>
+            </div>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <h3>◆ Время для себя утром</h3>
+                    <p>Брови и губы уже выглядят аккуратно и свежо. Вы просыпаетесь с готовым лёгким макияжем.</p>
+                </div>
+                <div class="benefit-card">
+                    <h3>◆ Благородная натуральность</h3>
+                    <p>Минеральные и органические пигменты высшего качества. Цвет плавно светлеет со временем без синевы.</p>
+                </div>
+                <div class="benefit-card">
+                    <h3>◆ Стойкость 24/7</h3>
+                    <p>Спортзал, бассейн, спа или отпуск — контур и цвет сохраняют свежесть в любых ситуациях.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Услуги и цены -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="sec-title">
+                <h2><span class="grad-text">Услуги и стоимость</span></h2>
+                <p>Фиксированные цены без скрытых платежей</p>
+            </div>
+            <div class="services-grid">
+                <!-- Брови -->
+                <div class="service-card">
+                    <div>
+                        <span class="service-tag">Флагман</span>
+                        <h3>Перманентный макияж бровей</h3>
+                        <p>Пудровая техника, невесомая теневая вуаль. Выверенная форма с учетом пропорций лица.</p>
+                    </div>
+                    <div>
+                        <div class="service-pricing">
+                            <span class="price-current">5 000 ₽</span>
+                            <span class="price-discount">4 000 ₽ с бонусом</span>
+                        </div>
+                        <button class="btn" onclick="openQuiz()" style="width: 100%;">Зафиксировать спеццену</button>
+                    </div>
+                </div>
+
+                <!-- Губы -->
+                <div class="service-card">
+                    <div>
+                        <span class="service-tag">Флагман</span>
+                        <h3>Перманентный макияж губ</h3>
+                        <p>Акварельная и помадная техники. Ровный контур, визуальный объем и нежный природный оттенок.</p>
+                    </div>
+                    <div>
+                        <div class="service-pricing">
+                            <span class="price-current">5 000 ₽</span>
+                            <span class="price-discount">4 000 ₽ с бонусом</span>
+                        </div>
+                        <button class="btn" onclick="openQuiz()" style="width: 100%;">Зафиксировать спеццену</button>
+                    </div>
+                </div>
+
+                <!-- Коррекция -->
+                <div class="service-card">
+                    <div>
+                        <span class="service-tag">Вторичный сеанс</span>
+                        <h3>Коррекция перманента</h3>
+                        <p>Финальное закрепление цвета и плотности спустя 1–1.5 месяца для долговечности на 1.5–2 года.</p>
+                    </div>
+                    <div>
+                        <div class="service-pricing">
+                            <span class="price-current">3 000 ₽</span>
+                        </div>
+                        <button class="btn" onclick="openQuiz()" style="width: 100%;">Записаться на сеанс</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- О мастере -->
+    <section class="master" id="master">
+        <div class="container master-grid">
+            <div class="master-photo">Портрет Дианы Емельяновой</div>
+            <div class="master-info">
+                <h3><span class="grad-text">Диана Емельянова</span></h3>
+                <span class="role">Мастер перманентного макияжа</span>
+                <p>Моя философия — подчеркнуть достоинства вашей внешности, сохранив индивидуальность и природную гармонию.</p>
+                <p>Строгое соблюдение стерильности по нормам СанПиН. Одноразовые картриджи вскрываются только при вас, а современные сертифицированные аппараты делают процедуру быстрой и нетравматичной.</p>
+                <span class="sert-link" onclick="openQuiz()">Посмотреть сертификаты мастера →</span>
+                <div>
+                    <button class="btn" onclick="openQuiz()">Бесплатная консультация</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Портфолио -->
+    <section class="portfolio" id="portfolio">
+        <div class="container">
+            <div class="sec-title">
+                <h2><span class="grad-text">Галерея заживших работ</span></h2>
+                <p>Реальные результаты клиенток в Чебоксарах</p>
+            </div>
+            <div class="portfolio-grid">
+                <div class="portfolio-item">Губы: Акварельный нюд</div>
+                <div class="portfolio-item">Брови: Пудровое напыление</div>
+                <div class="portfolio-item">Губы: Сочный оттенок</div>
+                <div class="portfolio-item">Брови: Мягкое перекрытие</div>
+            </div>
+
+            <!-- Интерактивная плашка Instagram -->
+            <div class="insta-banner">
+                <div class="insta-banner-glow"></div>
+                <div class="insta-banner-content">
+                    <div class="insta-profile-block">
+                        <div class="insta-avatar-wrapper">
+                            <div class="insta-story-ring"></div>
+                            <div class="insta-avatar">ДЕ</div>
+                        </div>
+                        <div class="insta-info">
+                            <div class="insta-name-row">
+                                <span class="insta-name">Диана Емельянова</span>
+                                <span class="insta-verified" title="Официальный профиль мастера">
+                                    <svg width="15" height="15" viewBox="0 0 24 24" fill="#D1AA74">
+                                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                                    </svg>
+                                </span>
+                            </div>
+                            <a href="https://www.instagram.com/didi_permanent_/" target="_blank" rel="noopener noreferrer" class="insta-handle">@didi_permanent_</a>
+                        </div>
+                    </div>
+
+                    <div class="insta-highlights">
+                        <a href="https://www.instagram.com/didi_permanent_/" target="_blank" rel="noopener noreferrer" class="insta-pill">
+                            <span>🔥 Reels До / После</span>
+                        </a>
+                        <a href="https://www.instagram.com/didi_permanent_/" target="_blank" rel="noopener noreferrer" class="insta-pill">
+                            <span>💋 Зажившие губы</span>
+                        </a>
+                        <a href="https://www.instagram.com/didi_permanent_/" target="_blank" rel="noopener noreferrer" class="insta-pill">
+                            <span>✨ Пудровые брови</span>
+                        </a>
+                    </div>
+
+                    <div class="insta-action">
+                        <a href="https://www.instagram.com/didi_permanent_/" target="_blank" rel="noopener noreferrer" class="btn insta-btn">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 8px;">
+                                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                            </svg>
+                            Смотреть работы в Instagram
+                        </a>
+                        <span class="insta-subtext">Обновление работ ежедневно</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Отзывы -->
+    <section class="reviews" id="reviews">
+        <div class="container">
+            <div class="sec-title">
+                <h2><span class="grad-text">Отзывы клиенток</span></h2>
+                <p>Впечатления девушек после процедуры</p>
+            </div>
+            <div class="reviews-grid">
+                <div class="review-card">
+                    <p>«Диана, цвет губ получился просто волшебный! Нежный, естественный, форма идеальная. Во время процедуры не почувствовала никакой боли. Огромное спасибо!»</p>
+                    <div class="review-author">Елена С.</div>
+                </div>
+                <div class="review-card">
+                    <p>«Брови зажили прекрасно. Никаких темных резких линий — только мягкая пудровая тень. Утром теперь собираюсь мгновенно!»</p>
+                    <div class="review-author">Анна К.</div>
+                </div>
+                <div class="review-card">
+                    <p>«Очень аккуратный и тактичный мастер. Эскиз согласовывали внимательно, до каждого миллиметра. Всем рекомендую Диану!»</p>
+                    <div class="review-author">Мария В.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Плавающая кнопка записи -->
+    <button class="btn sticky-btn" onclick="openQuiz()">Скидка 1000 ₽ на запись</button>
+
+    <!-- Плашка Cookie -->
+    <div class="cookie-banner" id="cookieBanner">
+        <div class="cookie-text">
+            🍪 Мы используем файлы cookie для корректной работы сайта и персонализации предложений.
+        </div>
+        <button class="btn cookie-btn" onclick="acceptCookies()">Принять</button>
+    </div>
+
+    <!-- Футер -->
+    <footer>
+        <div class="container">
+            <p>© 2026 Студия перманентного макияжа Дианы Емельяновой. Чебоксары.</p>
+            <p style="margin-top: 6px; font-size: 12px; color: var(--accent-gold);">Запись и консультации через онлайн-квиз, Telegram, VK и Instagram</p>
+        </div>
+    </footer>
+
+    <!-- Квиз модальное окно -->
+    <div class="modal" id="quizModal">
+        <div class="quiz-box">
+            <div class="quiz-header">
+                <div class="consultant-mini">
+                    <div class="consultant-avatar">ДЕ</div>
+                    <div>
+                        <div style="font-weight: 700; font-size: 14px;">Диана Емельянова</div>
+                        <div style="font-size: 11px; color: var(--accent-gold);">Мастер перманентного макияжа</div>
+                    </div>
+                </div>
+                <button class="close-modal" onclick="closeQuiz()">&times;</button>
+            </div>
+
+            <div class="quiz-body">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+
+                <form id="quizForm">
+                    <!-- Шаг 1: Зона -->
+                    <div class="quiz-step active" data-step="1">
+                        <h4>1. Какая зона вас интересует?</h4>
+                        <div class="quiz-options">
+                            <div class="quiz-option" onclick="selectOption(this, 1)">💋 Перманент губ (5 000 ₽)</div>
+                            <div class="quiz-option" onclick="selectOption(this, 1)">✨ Перманент бровей (5 000 ₽)</div>
+                            <div class="quiz-option" onclick="selectOption(this, 1)">💎 Комплекс: Брови + Губы со скидкой</div>
+                            <div class="quiz-option" onclick="selectOption(this, 1)">🔄 Коррекция работы (3 000 ₽)</div>
+                        </div>
+                    </div>
+
+                    <!-- Шаг 2: Старый татуаж -->
+                    <div class="quiz-step" data-step="2">
+                        <h4>2. Есть ли у вас старый перманент (татуаж)?</h4>
+                        <div class="quiz-options">
+                            <div class="quiz-option" onclick="selectOption(this, 2)">Нет, делаю процедуру впервые</div>
+                            <div class="quiz-option" onclick="selectOption(this, 2)">Да, остался легкий светлый оттенок</div>
+                            <div class="quiz-option" onclick="selectOption(this, 2)">Да, требуется перекрытие старой работы</div>
+                            <div class="quiz-option" onclick="selectOption(this, 2)">Затрудняюсь ответить, нужна консультация</div>
+                        </div>
+                    </div>
+
+                    <!-- Шаг 3: Желаемый результат -->
+                    <div class="quiz-step" data-step="3">
+                        <h4>3. Какой результат вам ближе?</h4>
+                        <div class="quiz-options">
+                            <div class="quiz-option" onclick="selectOption(this, 3)">Максимально естественный / полупрозрачный нюд</div>
+                            <div class="quiz-option" onclick="selectOption(this, 3)">Эффект легкого натурального макияжа</div>
+                            <div class="quiz-option" onclick="selectOption(this, 3)">Более выразительный и насыщенный цвет</div>
+                            <div class="quiz-option" onclick="selectOption(this, 3)">Хочу подобрать технику вместе с мастером</div>
+                        </div>
+                    </div>
+
+                    <!-- Шаг 4: Удобное время -->
+                    <div class="quiz-step" data-step="4">
+                        <h4>4. В какие дни вам комфортнее прийти?</h4>
+                        <div class="quiz-options">
+                            <div class="quiz-option" onclick="selectOption(this, 4)">Будние дни: первая половина дня</div>
+                            <div class="quiz-option" onclick="selectOption(this, 4)">Будние дни: вечернее время</div>
+                            <div class="quiz-option" onclick="selectOption(this, 4)">Выходные дни</div>
+                            <div class="quiz-option" onclick="selectOption(this, 4)">Ближайшее свободное окно мастера</div>
+                        </div>
+                    </div>
+
+                    <!-- Шаг 5: Контакты -->
+                    <div class="quiz-step" data-step="5">
+                        <h4>5. Куда прислать расчет и закрепить скидку 1000 ₽?</h4>
+                        <div class="form-group">
+                            <label>Ваше имя</label>
+                            <input type="text" id="quizName" placeholder="Например, Анна" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Номер телефона</label>
+                            <input type="tel" id="quizPhone" placeholder="+7 (___) ___-__-__" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Где удобнее получить ответ?</label>
+                            <select id="quizMessenger">
+                                <option value="Telegram">В Telegram</option>
+                                <option value="WhatsApp">В WhatsApp</option>
+                                <option value="Звонок">Звонок по телефону</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn" style="width: 100%; margin-top: 10px;">Зафиксировать скидку 1000 ₽</button>
+                    </div>
+
+                    <div class="quiz-footer">
+                        <button type="button" class="btn-prev" id="btnPrev" onclick="prevStep()" style="visibility: hidden;">← Назад</button>
+                        <span id="stepCounter" style="font-size: 12px; color: var(--text-muted); text-transform: uppercase;">Шаг 1 из 5</span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        let currentStep = 1;
+        const totalSteps = 5;
+        const answers = {};
+
+        // Конфигурация Telegram и WhatsApp
+        const TG_BOT_TOKEN = "8848320511:AAEnpQx2Gw3mzngZyftz7z43xRI8XdCmZxE";
+        const TG_CHAT_ID = "637328406";
+        const MASTER_PHONE = "79XXXXXXXXX"; // Укажите номер мастера для WhatsApp (только цифры)
+
+        // --- Управление плашкой Cookie ---
+        function checkCookies() {
+            if (!localStorage.getItem('didi_cookies_accepted')) {
+                setTimeout(() => {
+                    const banner = document.getElementById('cookieBanner');
+                    if (banner) banner.classList.add('show');
+                }, 700);
+            }
+        }
+
+        function acceptCookies() {
+            localStorage.setItem('didi_cookies_accepted', 'true');
+            const banner = document.getElementById('cookieBanner');
+            if (banner) {
+                banner.classList.remove('show');
+            }
+        }
+
+        // Запуск проверки cookies при загрузке страницы
+        document.addEventListener('DOMContentLoaded', checkCookies);
+
+        // --- Управление Квизом ---
+        function openQuiz() {
+            document.getElementById('quizModal').classList.add('active');
+        }
+
+        function closeQuiz() {
+            document.getElementById('quizModal').classList.remove('active');
+        }
+
+        function selectOption(element, step) {
+            const options = element.parentElement.querySelectorAll('.quiz-option');
+            options.forEach(opt => opt.classList.remove('selected'));
+            element.classList.add('selected');
+            answers[`step_${step}`] = element.innerText;
+
+            setTimeout(() => {
+                if (currentStep < totalSteps) {
+                    goToStep(currentStep + 1);
+                }
+            }, 250);
+        }
+
+        function goToStep(step) {
+            document.querySelectorAll('.quiz-step').forEach(el => el.classList.remove('active'));
+            document.querySelector(`.quiz-step[data-step="${step}"]`).classList.add('active');
+            
+            currentStep = step;
+            document.getElementById('progressFill').style.width = `${(currentStep / totalSteps) * 100}%`;
+            document.getElementById('stepCounter').innerText = `Шаг ${currentStep} из ${totalSteps}`;
+            document.getElementById('btnPrev').style.visibility = currentStep > 1 ? 'visible' : 'hidden';
+        }
+
+        function prevStep() {
+            if (currentStep > 1) {
+                goToStep(currentStep - 1);
+            }
+        }
+
+        document.getElementById('quizForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const name = document.getElementById('quizName').value;
+            const phone = document.getElementById('quizPhone').value;
+            const messenger = document.getElementById('quizMessenger').value;
+
+            // Формирование текста заявки для Telegram
+            const messageText = 
+`🔥 НОВАЯ ЗАЯВКА — DIDI PERMANENT!
+
+👤 Имя: ${name}
+📞 Телефон: ${phone}
+💬 Способ связи: ${messenger}
+
+📋 Ответы из квиза:
+• Зона: ${answers.step_1 || 'Не выбрано'}
+• Старый перманент: ${answers.step_2 || 'Не выбрано'}
+• Желаемый результат: ${answers.step_3 || 'Не выбрано'}
+• Удобное время: ${answers.step_4 || 'Не выбрано'}`;
+
+            // Отправка в Telegram
+            try {
+                await fetch(`https://api.telegram.org/bot${TG_BOT_TOKEN}/sendMessage`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        chat_id: TG_CHAT_ID,
+                        text: messageText
+                    })
+                });
+            } catch (err) {
+                console.error('Ошибка отправки в Telegram:', err);
+            }
+
+            // Уведомление клиенту
+            alert(`Спасибо, ${name}! Скидка 1000 ₽ зафиксирована за номером ${phone}. Скоро свяжемся с вами!`);
+            closeQuiz();
+
+            // Перенаправление в WhatsApp (если выбран этот способ)
+            if (messenger === 'WhatsApp' && MASTER_PHONE !== "79XXXXXXXXX") {
+                const waUrl = `https://wa.me/${MASTER_PHONE}?text=${encodeURIComponent(messageText)}`;
+                window.open(waUrl, '_blank');
+            }
+        });
+    </script>
+</body>
+</html>
