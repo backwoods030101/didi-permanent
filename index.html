@@ -996,7 +996,89 @@
             background: rgba(16, 7, 5, 0.88);
             backdrop-filter: blur(10px);
         }
+/* FAQ Секция */
+.faq {
+    padding: 90px 0;
+    position: relative;
+}
 
+.faq-list {
+    max-width: 820px;
+    margin: 40px auto 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.faq-item {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 18px;
+    overflow: hidden;
+    transition: border-color 0.3s, background 0.3s;
+    backdrop-filter: blur(10px);
+}
+
+.faq-item:hover {
+    border-color: var(--glass-border-hover);
+}
+
+.faq-item.active {
+    border-color: var(--accent-gold);
+    background: rgba(38, 20, 16, 0.75);
+}
+
+.faq-question {
+    padding: 22px 26px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--text-light);
+    user-select: none;
+    transition: color 0.3s;
+}
+
+.faq-item.active .faq-question {
+    color: var(--accent-gold);
+}
+
+.faq-icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: rgba(209, 170, 116, 0.15);
+    color: var(--accent-gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    line-height: 1;
+    transition: transform 0.35s ease, background 0.3s, color 0.3s;
+    flex-shrink: 0;
+}
+
+.faq-item.active .faq-icon {
+    transform: rotate(45deg);
+    background: var(--accent-gold);
+    color: var(--bg-deep);
+}
+
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease, padding 0.35s ease;
+    padding: 0 26px;
+    color: var(--text-muted);
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+.faq-item.active .faq-answer {
+    padding: 0 26px 22px 26px;
+}
         /* Мобильная адаптация */
         @media (max-width: 768px) {
     body {
@@ -1273,7 +1355,56 @@
             </div>
         </div>
     </section>
+<!-- FAQ (Частые вопросы) -->
+<section class="faq" id="faq">
+    <div class="container">
+        <div class="sec-title" style="text-align: center;">
+            <h2><span class="grad-text">Частые вопросы</span></h2>
+            <p>Всё, что важно знать перед первой процедурой перманентного макияжа</p>
+        </div>
+        <div class="faq-list">
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Больно ли делать процедуру?</span>
+                    <div class="faq-icon">+</div>
+                </div>
+                <div class="faq-answer">
+                    Нет, процедура проходит максимально комфортно. Используется сертифицированная двухэтапная анестезия (первичная перед нанесением и вторичная во время работы). Большинство клиенток ощущают лишь легкое щекотание и часто засыпают на кушетке.
+                </div>
+            </div>
 
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Не уйдет ли цвет в синий или красный со временем?</span>
+                    <div class="faq-icon">+</div>
+                </div>
+                <div class="faq-answer">
+                    Исключено. Работа ведется в верхних слоях кожи (пудровая техника) на минеральных и гибридных пигментах премиум-класса. Через 1,5–2 года цвет равномерно и плавно светлеет в натуральный тон без перехода в неестественные оттенки.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Сколько длится заживление и как ухаживать?</span>
+                    <div class="faq-icon">+</div>
+                </div>
+                <div class="faq-answer">
+                    Первичное заживление занимает 5–7 дней без грубых корок — только легкое шелушение. После процедуры вы получите индивидуальный набор для пост-ухода и подробную памятку.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Можно ли перекрыть старый татуаж?</span>
+                    <div class="faq-icon">+</div>
+                </div>
+                <div class="faq-answer">
+                    Перекрытие возможно, если старый пигмент достаточно светлый. Вы можете прислать четкое фото зоны в мессенджер для бесплатной оценки и консультации перед визитом.
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
     <!-- Отзывы -->
     <section class="reviews" id="reviews">
         <div class="container">
@@ -1481,7 +1612,31 @@
                 goToStep(currentStep - 1);
             }
         }
+// Логика аккордеона FAQ
+document.querySelectorAll('.faq-question').forEach(question => {
+    question.addEventListener('click', () => {
+        const item = question.parentElement;
+        const answer = item.querySelector('.faq-answer');
+        const isActive = item.classList.contains('active');
 
+        // Закрываем остальные открытые вкладки
+        document.querySelectorAll('.faq-item').forEach(otherItem => {
+            if (otherItem !== item) {
+                otherItem.classList.remove('active');
+                otherItem.querySelector('.faq-answer').style.maxHeight = null;
+            }
+        });
+
+        // Открываем или закрываем выбранную
+        if (!isActive) {
+            item.classList.add('active');
+            answer.style.maxHeight = answer.scrollHeight + 40 + 'px';
+        } else {
+            item.classList.remove('active');
+            answer.style.maxHeight = null;
+        }
+    });
+});
        async function submitQuiz() {
     const nameInput = document.getElementById('quizName');
     const phoneInput = document.getElementById('quizPhone');
