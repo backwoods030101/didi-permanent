@@ -122,7 +122,51 @@
             z-index: 100;
             border-bottom: 1px solid var(--glass-border);
         }
+/* Бегущая строка */
+.marquee-bar {
+    background: rgba(20, 9, 7, 0.65);
+    border-bottom: 1px solid rgba(209, 170, 116, 0.2);
+    backdrop-filter: blur(8px);
+    overflow: hidden;
+    white-space: nowrap;
+    display: flex;
+    padding: 10px 0;
+    user-select: none;
+}
 
+.marquee-track {
+    display: flex;
+    align-items: center;
+    gap: 36px;
+    animation: marquee 22s linear infinite;
+    flex-shrink: 0;
+    min-width: 100%;
+}
+
+.marquee-bar:hover .marquee-track {
+    animation-play-state: paused;
+}
+
+.marquee-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}
+
+.marquee-item .gold-icon {
+    color: var(--accent-gold);
+    font-size: 13px;
+}
+
+@keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+}
         .nav-wrap {
             display: flex;
             justify-content: space-between;
@@ -1030,7 +1074,24 @@
             </div>
         </div>
     </header>
-
+<!-- Бегущая строка -->
+<div class="marquee-bar">
+    <div class="marquee-track">
+        <div class="marquee-item"><span class="gold-icon">✦</span> Естественный пудровый эффект</div>
+        <div class="marquee-item"><span class="gold-icon">◆</span> Премиальные органические пигменты</div>
+        <div class="marquee-item"><span class="gold-icon">✦</span> Стерильность по нормам СанПиН</div>
+        <div class="marquee-item"><span class="gold-icon">◆</span> Без боли и синевы со временем</div>
+        <div class="marquee-item"><span class="gold-icon">✦</span> Скидка 1000 ₽ на первый визит</div>
+        <div class="marquee-item"><span class="gold-icon">◆</span> Чебоксары • Диана Емельянова</div>
+        <!-- Дубликат для эффекта бесконечной бесшовной ленты -->
+        <div class="marquee-item"><span class="gold-icon">✦</span> Естественный пудровый эффект</div>
+        <div class="marquee-item"><span class="gold-icon">◆</span> Премиальные органические пигменты</div>
+        <div class="marquee-item"><span class="gold-icon">✦</span> Стерильность по нормам СанПиН</div>
+        <div class="marquee-item"><span class="gold-icon">◆</span> Без боли и синевы со временем</div>
+        <div class="marquee-item"><span class="gold-icon">✦</span> Скидка 1000 ₽ на первый визит</div>
+        <div class="marquee-item"><span class="gold-icon">◆</span> Чебоксары • Диана Емельянова</div>
+    </div>
+</div>
     <!-- Первый экран -->
     <section class="hero">
         <div class="container hero-grid">
