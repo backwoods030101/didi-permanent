@@ -955,32 +955,38 @@
 
         /* Мобильная адаптация */
         @media (max-width: 768px) {
-            .nav-links { display: none; }
-            .hero-grid, .master-grid, .benefits-grid, .reviews-grid { grid-template-columns: 1fr; }
-            .hero-content h1 { font-size: 30px; }
-            .sec-title h2 { font-size: 24px; }
-            .hero-visual-img { height: 260px; }
-            .master-photo { height: 320px; }
+    body {
+        background-attachment: scroll !important;
+        background-position: center top !important;
+        background-size: auto, auto, auto, 100% auto, cover !important;
+    }
 
-            .insta-banner { padding: 24px 20px; }
-            .insta-banner-content { flex-direction: column; align-items: flex-start; gap: 20px; }
-            .insta-action { width: 100%; }
-            .insta-btn { width: 100%; }
+    .nav-links { display: none; }
+    .hero-grid, .master-grid, .benefits-grid, .reviews-grid { grid-template-columns: 1fr; }
+    .hero-content h1 { font-size: 30px; }
+    .sec-title h2 { font-size: 24px; }
+    .hero-visual-img { height: 260px; }
+    .master-photo { height: 320px; }
 
-            .cookie-banner {
-                left: 15px;
-                right: 15px;
-                bottom: 85px;
-                max-width: none;
-                flex-direction: column;
-                align-items: stretch;
-                text-align: center;
-                gap: 12px;
-            }
-            .cookie-btn {
-                width: 100%;
-            }
-        }
+    .insta-banner { padding: 24px 20px; }
+    .insta-banner-content { flex-direction: column; align-items: flex-start; gap: 20px; }
+    .insta-action { width: 100%; }
+    .insta-btn { width: 100%; }
+
+    .cookie-banner {
+        left: 15px;
+        right: 15px;
+        bottom: 85px;
+        max-width: none;
+        flex-direction: column;
+        align-items: stretch;
+        text-align: center;
+        gap: 12px;
+    }
+    .cookie-btn {
+        width: 100%;
+    }
+}
     </style>
 </head>
 <body>
