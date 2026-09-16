@@ -1687,6 +1687,7 @@ document.querySelectorAll('.faq-question').forEach(question => {
 • Удобное время: ${answers.step_4 || 'Не выбрано'}`;
 
     try {
+
         // Запрос отправляется через серверный прокси Netlify без блокировок операторов
         await fetch(`/tg-api/bot${TG_BOT_TOKEN}/sendMessage`, {
             method: 'POST',
@@ -1699,7 +1700,23 @@ document.querySelectorAll('.faq-question').forEach(question => {
     } catch (error) {
         console.warn('Ошибка при отправке в Telegram:', error);
     }
-
+// Дублирование заявки в Google Таблицу
+        try {
+            fetch('https://script.google.com/macros/s/AKfycbw_f4uuy2vN1oH5UpY2mfwDKk8ttLXxQGVFFss5NaOUqK6-hYGFEhn0UFi7ZEO_fL1I9A/exec', {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    name: name,
+                    phone: phone,
+                    service: typeof answers !== 'undefined' && answers.step_1 ? answers.step_1 : 'Перманентный макияж',
+                    details: typeof answers !== 'undefined' ? Object.entries(answers).map(([k, v]) => `${k}: ${v}`).join('; ') : '',
+                    contactMethod: typeof messenger !== 'undefined' ? messenger : 'Не указан'
+                })
+            });
+        } catch (tableErr) {
+            console.warn('Ошибка отправки в Google Таблицу:', tableErr);
+        }
     // Сброс кнопки и закрытие модалки
     submitBtn.innerText = originalText;
     submitBtn.disabled = false;
