@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DiDi CRM | Панель управления мастера</title>
+  <!-- Tailwind CSS CDN для быстрой надежной верстки -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Шрифты -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Иконки Lucide -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+<!-- Supabase JS Client -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              dark: '#120f0d',
+              card: '#1b1613',
+              cardHover: '#231d19',
+              border: '#382b22',
+              gold: '#c69c6d',
+              goldLight: '#e4be90',
+              goldDark: '#997346',
+              textMuted: '#9e9188'
+            }
+          },
+          fontFamily: {
+            sans: ['Montserrat', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #120f0d;
+      color: #f5ede6;
+      font-family: 'Montserrat', sans-serif;
+    }
+    /* Кастомный скроллбар в стиле лендинга */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #120f0d; }
+    ::-webkit-scrollbar-thumb { background: #382b22; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #c69c6d; }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col md:flex-row antialiased">
+<!-- Экран ввода ПИН-кода для входа -->
+<div id="pin-screen" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#0d0d0f] px-4 text-white">
+  <div class="w-full max-w-xs rounded-2xl border border-white/10 bg-[#16161a] p-6 shadow-2xl text-center">
+    <div class="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-[#d4af37]/10 text-[#d4af37]">
+      <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+    </div>
+    <h2 class="text-lg font-semibold tracking-wide">Вход в CRM</h2>
+    <p class="mt-1 text-xs text-gray-400">Введите пин-код администратора</p>
+    
+    <input type="password" id="pin-input" inputmode="numeric" maxlength="8" placeholder="••••" 
+      class="mt-5 w-full rounded-xl border border-white/15 bg-black/40 px-4 py-3 text-center text-xl tracking-[0.3em] text-white outline-none focus:border-[#d4af37]" />
+    
+    <div id="pin-error" class="mt-2 hidden text-xs text-red-400">Неверный пин-код</div>
+    
+    <button onclick="checkPin()" class="mt-4 w-full rounded-xl bg-[#d4af37] py-2.5 text-sm font-semibold text-black transition hover:bg-[#c39f2e] active:scale-[0.98]">
+      Войти
+    </button>
+  </div>
+</div>
+  <!-- Сайдбар навигации -->
+  <aside class="w-full md:w-64 bg-brand-card border-b md:border-b-0 md:border-r border-brand-border p-5 flex flex-col justify-between shrink-0">
+    <div>
+      <div class="flex items-center space-x-3 mb-8">
+        <div class="w-10 h-10 rounded-full border border-brand-gold/60 flex items-center justify-center bg-brand-gold/10 text-brand-gold font-bold">
+          D
+        </div>
+        <div>
+          <h1 class="text-base font-bold tracking-wider text-brand-gold">DIDI PERMANENT</h1>
+          <p class="text-xs text-brand-textMuted">Рабочее место мастера</p>
+        </div>
+      </div>
+
+      <!-- Вкладки -->
+      <nav class="space-y-2">
+        <button onclick="switchTab('calendar')" id="tab-calendar" class="tab-btn w-full flex items-center space-x-3 px-3 py-2.5 rounded-xl text-sm font-medium transition duration-200 bg-brand-gold/15 text-brand-gold border border-brand-gold/30">
+          <i data-lucide="calendar" class="w-4 h-4"></i>
+          <span>Журнал записи</span>
+        </button>
+
+        <button onclick="switchTab('leads')" id="tab-leads" class="tab-btn w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-sm font-medium text-brand-textMuted hover:text-brand-gold hover:bg-brand-cardHover transition duration-200">
+          <div class="flex items-center space-x-3">
+            <i data-lucide="inbox" class="w-4 h-4"></i>
+            <span>Входящие с сайта</span>
+          </div>
+          <span id="leads-count-badge" class="px-2 py-0.5 text-xs rounded-full bg-brand-gold text-brand-dark font-bold">0</span>
+        </button>
+
+        <button onclick="switchTab('clients')" id="tab-clients" class="tab-btn w-full flex items-center space-x-3 px-3 py-2.5 rounded-xl text-sm font-medium text-brand-textMuted hover:text-brand-gold hover:bg-brand-cardHover transition duration-200">
+          <i data-lucide="users" class="w-4 h-4"></i>
+          <span>База и техкарты</span>
+        </button>
+
+        <button onclick="switchTab('retention')" id="tab-retention" class="tab-btn w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-sm font-medium text-brand-textMuted hover:text-brand-gold hover:bg-brand-cardHover transition duration-200">
+          <div class="flex items-center space-x-3">
+            <i data-lucide="sparkles" class="w-4 h-4"></i>
+            <span>Ждут коррекцию</span>
+          </div>
+          <span id="retention-count-badge" class="px-2 py-0.5 text-xs rounded-full bg-amber-500/20 text-amber-300 font-semibold border border-amber-500/30">0</span>
+        </button>
+      </nav>
+    </div>
+
+    <!-- Быстрая плашка графика -->
+    <div class="mt-8 pt-5 border-t border-brand-border/60 text-xs text-brand-textMuted space-y-1">
+      <div class="flex justify-between"><span>График:</span> <span class="text-brand-gold font-medium">09:00 — 21:00</span></div>
+      <div class="flex justify-between"><span>Буфер между записями:</span> <span class="text-brand-gold font-medium">20 мин</span></div>
+      <div class="pt-3">
+        <button onclick="openBookingModal()" class="w-full bg-gradient-to-r from-brand-goldDark to-brand-gold hover:brightness-110 text-brand-dark font-semibold py-2 px-3 rounded-lg shadow-md transition flex items-center justify-center space-x-2">
+          <i data-lucide="plus" class="w-4 h-4"></i>
+          <span>Новая запись</span>
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Основная рабочая область -->
+  <main class="flex-1 p-4 md:p-8 overflow-y-auto max-w-7xl w-full">
+
+    <!-- Вкладка 1: Журнал расписания -->
+    <section id="view-calendar" class="space-y-6">
+      <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div>
+          <h2 class="text-2xl font-bold text-brand-goldLight">Журнал расписания</h2>
+          <p class="text-xs text-brand-textMuted">Рабочий день: 09:00 - 21:00 с автоматическим перерывом 20 мин</p>
+        </div>
+        <div class="flex items-center space-x-3">
+          <input type="date" id="calendar-date-picker" onchange="renderCalendarDay()" class="bg-brand-card border border-brand-border text-brand-goldLight rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-brand-gold">
+          <button onclick="openBookingModal()" class="bg-brand-gold text-brand-dark px-4 py-2 rounded-lg text-sm font-semibold hover:bg-brand-goldLight transition flex items-center space-x-2">
+            <i data-lucide="plus" class="w-4 h-4"></i>
+            <span>Записать клиента</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Сетка часов -->
+      <div class="bg-brand-card border border-brand-border rounded-2xl p-4 shadow-xl overflow-x-auto">
+        <div class="min-w-[600px] space-y-2" id="time-grid-container">
+          <!-- Генерируется через JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Вкладка 2: Входящие с сайта -->
+    <section id="view-leads" class="hidden space-y-6">
+      <div class="flex items-center justify-between">
+        <div>
+          <h2 class="text-2xl font-bold text-brand-goldLight">Входящие заявки с сайта</h2>
+          <p class="text-xs text-brand-textMuted">Заявки из квиза и контактных форм</p>
+        </div>
+        <button onclick="addMockLead()" class="border border-brand-gold/40 text-brand-gold hover:bg-brand-gold/10 px-3 py-1.5 rounded-lg text-xs font-medium transition flex items-center space-x-1.5">
+          <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+          <span>Сгенерировать тестовый лид с сайта</span>
+        </button>
+      </div>
+
+      <div id="leads-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <!-- Генерируется через JS -->
+      </div>
+    </section>
+
+    <!-- Вкладка 3: База клиентов и Техкарты -->
+    <section id="view-clients" class="hidden space-y-6">
+      <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div>
+          <h2 class="text-2xl font-bold text-brand-goldLight">Клиентская база и техкарты</h2>
+          <p class="text-xs text-brand-textMuted">Формулы миксов, конфигурации игл, фото До/После</p>
+        </div>
+        <input type="text" id="client-search" oninput="renderClientsList()" placeholder="Поиск по имени или телефону..." class="w-full sm:w-72 bg-brand-card border border-brand-border text-sm rounded-lg px-3 py-2 text-brand-goldLight focus:outline-none focus:border-brand-gold">
+      </div>
+
+      <div id="clients-table-container" class="bg-brand-card border border-brand-border rounded-2xl overflow-hidden shadow-xl">
+        <!-- Таблица клиентов -->
+        <table class="w-full text-left text-sm">
+          <thead class="bg-brand-dark/60 text-brand-textMuted text-xs uppercase border-b border-brand-border">
+            <tr>
+              <th class="p-4">Клиент</th>
+              <th class="p-4">Телефон</th>
+              <th class="p-4">Визитов</th>
+              <th class="p-4">Противопоказания</th>
+              <th class="p-4 text-right">Действие</th>
+            </tr>
+          </thead>
+          <tbody id="clients-table-body" class="divide-y divide-brand-border/40">
+            <!-- Заполняется через JS -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Вкладка 4: Контроль коррекций (30-45 дней) -->
+    <section id="view-retention" class="hidden space-y-6">
+      <div>
+        <h2 class="text-2xl font-bold text-brand-goldLight">Контроль повторной коррекции</h2>
+        <p class="text-xs text-brand-textMuted">Клиенты, у которых прошло 30–45 дней с первичной процедуры (идеальное окно для коррекции)</p>
+      </div>
+
+      <div id="retention-list" class="space-y-3">
+        <!-- Заполняется через JS -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Модальное окно: Новая запись / Редактирование визита -->
+  <div id="modal-booking" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
+    <div class="bg-brand-card border border-brand-border rounded-2xl max-w-xl w-full max-h-[90vh] overflow-y-auto p-6 shadow-2xl">
+      <div class="flex justify-between items-center pb-4 border-b border-brand-border">
+        <h3 id="modal-booking-title" class="text-lg font-bold text-brand-gold">Новая запись в расписание</h3>
+        <button onclick="closeModal('modal-booking')" class="text-brand-textMuted hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
+      </div>
+
+      <form id="booking-form" onsubmit="saveBooking(event)" class="mt-4 space-y-4 text-sm">
+        <input type="hidden" id="book-id">
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs text-brand-textMuted mb-1">Имя клиента *</label>
+            <input type="text" id="book-name" required class="w-full bg-brand-dark border border-brand-border rounded-lg p-2.5 text-white focus:outline-none focus:border-brand-gold">
+          </div>
+          <div>
+            <label class="block text-xs text-brand-textMuted mb-1">Телефон *</label>
+            <input type="tel" id="book-phone" required placeholder="+7 (___) ___-__-__" class="w-full bg-brand-dark border border-brand-border rounded-lg p-2.5 text-white focus:outline-none focus:border-brand-gold">
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs text-brand-textMuted mb-1">Услуга (тайминг рассчитается автоматически) *</label>
+          <select id="book-service" onchange="updateServiceDuration()" required class="w-full bg-brand-dark border border-brand-border rounded-lg p-2.5 text-white focus:outline-none focus:border-brand-gold">
+            <option value="eyebrows">Первичная процедура: Брови (2.5 ч / 150 мин)</option>
+            <option value="lips">Первичная процедура: Губы (2.5 ч / 150 мин)</option>
+            <option value="correction">Коррекция (1.5 ч / 90 мин)</option>
+            <option value="consultation">Консультация (20 мин)</option>
+          </select>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div>
+            <label class="block text-xs text-brand-textMuted mb-1">Дата *</label>
+            <input type="date" id="book-date" required class="w-full bg-brand-dark border border-brand-border rounded-lg p-2.5 text-white focus:outline-none focus:border-brand-gold">
+          </div>
+          <div>
+            <label class="block text-xs text-brand-textMuted mb-1">Время начала *</label>
+            <input type="time" id="book-time" required min="09:00" max="21:00" class="w-full bg-brand-dark border border-brand-border rounded-lg p-2.5 text-white focus:outline-none focus:border-brand-gold">
+          </div>
+          <div>
+            <label class="block text-xs text-brand-textMuted mb-1">Длительность + буфер</label>
+            <input type="text" id="book-duration-label" readonly class="w-full bg-brand-dark/40 border border-brand-border/40 text-brand-gold font-medium rounded-lg p-2.5">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs text-brand-textMuted mb-1">Статус визита</label>
+            <select id="book-status" class="w-full bg-brand-dark border border-brand-border rounded-lg p-2.5 text-white focus:outline-none focus:border-brand-gold">
+              <option value="new">Новая заявка</option>
+              <option value="prepaid">Предоплата внесена</option>
+              <option value="confirmed">Визит подтверждён</option>
+              <option value="completed">Завершён</option>
+              <option value="canceled">Отменён</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs text-brand-textMuted mb-1">Предоплата / Стоимость (₽)</label>
+            <div class="flex space-x-2">
+              <input type="number" id="book-prepay" placeholder="Предоплата" class="w-1/2 bg-brand-dark border border-brand-border rounded-lg p-2.5 text-white focus:outline-none focus:border-brand-gold">
+              <input type="number" id="book-price" placeholder="Итого ₽" class="w-1/2 bg-brand-dark border border-brand-border rounded-lg p-2.5 text-white focus:outline-none focus:border-brand-gold">
+            </div>
+          </div>
+        </div>
+
+        <!-- Блок техкарты мастера -->
+        <div class="p-4 rounded-xl bg-brand-dark/80 border border-brand-border/70 space-y-3">
+          <div class="text-xs font-semibold text-brand-gold flex items-center space-x-1.5">
+            <i data-lucide="file-edit" class="w-3.5 h-3.5"></i>
+            <span>Технологическая карта процедуры</span>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs text-brand-textMuted mb-1">Микс и номера пигментов</label>
+              <input type="text" id="tech-pigment" placeholder="напр: Hanafy №2 + капля №4" class="w-full bg-brand-card border border-brand-border rounded-lg p-2 text-xs text-white">
+            </div>
+            <div>
+              <label class="block text-xs text-brand-textMuted mb-1">Конфигурация иглы / аппарат</label>
+              <input type="text" id="tech-needle" placeholder="напр: Defenderr 1R 0.25 LL" class="w-full bg-brand-card border border-brand-border rounded-lg p-2 text-xs text-white">
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs text-brand-textMuted mb-1">Остаток цвета (%) на коррекции</label>
+              <input type="text" id="tech-retention" placeholder="напр: 70-80% холодный подтон" class="w-full bg-brand-card border border-brand-border rounded-lg p-2 text-xs text-white">
+            </div>
+            <div>
+              <label class="block text-xs text-brand-textMuted mb-1">Противопоказания / особенности</label>
+              <input type="text" id="tech-contra" placeholder="напр: сосуды близко, склонность к сухости" class="w-full bg-brand-card border border-brand-border rounded-lg p-2 text-xs text-white">
+            </div>
+          </div>
+
+          <!-- Фото До/После -->
+          <div class="pt-2 border-t border-brand-border/40 grid grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs text-brand-textMuted mb-1">Фото «ДО»</label>
+              <input type="file" id="photo-before-input" accept="image/*" onchange="previewImage(event, 'before')" class="text-xs text-brand-textMuted">
+              <div id="preview-before-box" class="mt-2 h-20 w-full rounded border border-brand-border bg-brand-card flex items-center justify-center overflow-hidden">
+                <span class="text-[10px] text-brand-textMuted">Нет фото</span>
+              </div>
+            </div>
+            <div>
+              <label class="block text-xs text-brand-textMuted mb-1">Фото «ПОСЛЕ»</label>
+              <input type="file" id="photo-after-input" accept="image/*" onchange="previewImage(event, 'after')" class="text-xs text-brand-textMuted">
+              <div id="preview-after-box" class="mt-2 h-20 w-full rounded border border-brand-border bg-brand-card flex items-center justify-center overflow-hidden">
+                <span class="text-[10px] text-brand-textMuted">Нет фото</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex justify-between items-center pt-2">
+          <button type="button" id="btn-delete-booking" onclick="deleteCurrentBooking()" class="text-rose-400 hover:text-rose-300 text-xs font-medium hidden">Удалить запись</button>
+          <div class="flex space-x-2 ml-auto">
+            <button type="button" onclick="closeModal('modal-booking')" class="px-4 py-2 border border-brand-border rounded-lg text-xs text-brand-textMuted hover:text-white">Отмена</button>
+            <button type="submit" class="px-5 py-2 bg-brand-gold hover:bg-brand-goldLight text-brand-dark font-semibold rounded-lg text-xs transition shadow-md">Сохранить запись</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Модальное окно: Просмотр техкарты клиента -->
+  <div id="modal-client-card" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
+    <div class="bg-brand-card border border-brand-border rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto p-6 shadow-2xl space-y-4">
+      <div class="flex justify-between items-center pb-3 border-b border-brand-border">
+        <div>
+          <h3 id="card-client-name" class="text-xl font-bold text-brand-gold">Карточка клиента</h3>
+          <p id="card-client-phone" class="text-xs text-brand-textMuted"></p>
+        </div>
+        <button onclick="closeModal('modal-client-card')" class="text-brand-textMuted hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
+      </div>
+
+      <div class="space-y-4" id="card-client-history">
+        <!-- История и фото заполняются динамически -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Скрипты логики CRM -->
+  <script>
+    // Инициализация Lucide иконок
+    document.addEventListener('DOMContentLoaded', () => {
+      lucide.createIcons();
+      initApp();
+    });
+
+    // Константы услуг и длительностей
+    const SERVICES = {
+      eyebrows: { title: 'Первичная процедура: Брови', duration: 150, buffer: 20, price: 6000 },
+      lips: { title: 'Первичная процедура: Губы', duration: 150, buffer: 20, price: 6000 },
+      correction: { title: 'Коррекция', duration: 90, buffer: 20, price: 3500 },
+      consultation: { title: 'Консультация', duration: 20, buffer: 10, price: 0 }
+    };
+
+    const STATUSES = {
+      new: { label: 'Новая заявка', color: 'bg-amber-500/20 text-amber-300 border-amber-500/30' },
+      prepaid: { label: 'Предоплата внесена', color: 'bg-blue-500/20 text-blue-300 border-blue-500/30' },
+      confirmed: { label: 'Визит подтверждён', color: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30' },
+      completed: { label: 'Завершён', color: 'bg-stone-500/20 text-stone-300 border-stone-500/30' },
+      canceled: { label: 'Отменён', color: 'bg-rose-500/20 text-rose-300 border-rose-500/30' }
+    };
+
+    // Хранилище состояния в LocalStorage
+    let state = {
+      bookings: JSON.parse(localStorage.getItem('didi_crm_bookings')) || [],
+      leads: JSON.parse(localStorage.getItem('didi_crm_leads')) || [],
+      currentPhotos: { before: null, after: null }
+    };
+
+    function saveState() {
+      localStorage.setItem('didi_crm_bookings', JSON.stringify(state.bookings));
+      localStorage.setItem('didi_crm_leads', JSON.stringify(state.leads));
+      updateBadges();
+    }
+
+    function initApp() {
+      fetchLeadsFromCloud();
+   subscribeToNewLeads();
+      // Установить сегодняшнюю дату в пикер
+      const today = new Date().toISOString().split('T')[0];
+      document.getElementById('calendar-date-picker').value = today;
+      document.getElementById('book-date').value = today;
+
+      // Если нет данных — заполнить аккуратными демо-записями
+      if (state.bookings.length === 0) {
+        seedDemoData(today);
+      }
+
+      updateServiceDuration();
+      renderCalendarDay();
+      renderLeads();
+      renderClientsList();
+      renderRetention();
+      updateBadges();
+      lucide.createIcons();
+    }
+
+    function switchTab(tabId) {
+      ['calendar', 'leads', 'clients', 'retention'].forEach(tab => {
+        document.getElementById(`view-${tab}`).classList.add('hidden');
+        const btn = document.getElementById(`tab-${tab}`);
+        btn.classList.remove('bg-brand-gold/15', 'text-brand-gold', 'border', 'border-brand-gold/30');
+        btn.classList.add('text-brand-textMuted');
+      });
+
+      document.getElementById(`view-${tabId}`).classList.remove('hidden');
+      const activeBtn = document.getElementById(`tab-${tabId}`);
+      activeBtn.classList.remove('text-brand-textMuted');
+      activeBtn.classList.add('bg-brand-gold/15', 'text-brand-gold', 'border', 'border-brand-gold/30');
+
+      if (tabId === 'calendar') renderCalendarDay();
+      if (tabId === 'leads') renderLeads();
+      if (tabId === 'clients') renderClientsList();
+      if (tabId === 'retention') renderRetention();
+      lucide.createIcons();
+    }
+
+    function updateBadges() {
+      document.getElementById('leads-count-badge').innerText = state.leads.length;
+      
+      // Считаем тех, кто ожидает коррекцию (прошло от 30 до 45 дней)
+      const now = new Date();
+      const needCorrection = state.bookings.filter(b => {
+        if (b.status !== 'completed' || b.service === 'correction' || b.service === 'consultation') return false;
+        const diffDays = Math.floor((now - new Date(b.date)) / (1000 * 60 * 60 * 24));
+        return diffDays >= 30 && diffDays <= 45;
+      });
+      document.getElementById('retention-count-badge').innerText = needCorrection.length;
+    }
+
+    // Рендер журнала расписания (день с 09:00 до 21:00)
+    function renderCalendarDay() {
+      const selectedDate = document.getElementById('calendar-date-picker').value;
+      const container = document.getElementById('time-grid-container');
+      container.innerHTML = '';
+
+      const dayBookings = state.bookings.filter(b => b.date === selectedDate && b.status !== 'canceled');
+
+      // Шаг с 9 до 21 (по часам)
+      for (let hour = 9; hour < 21; hour++) {
+        const hourStr = hour < 10 ? `0${hour}:00` : `${hour}:00`;
+        
+        // Проверяем, есть ли запись в этот час
+        const bookingInSlot = dayBookings.find(b => {
+          const [bH] = b.time.split(':').map(Number);
+          return bH === hour;
+        });
+
+        const row = document.createElement('div');
+        row.className = "flex items-start border-b border-brand-border/30 py-2 group hover:bg-brand-cardHover/30 rounded-lg px-2 transition";
+
+        const timeCol = document.createElement('div');
+        timeCol.className = "w-16 text-xs font-semibold text-brand-gold shrink-0 pt-1";
+        timeCol.innerText = hourStr;
+        row.appendChild(timeCol);
+
+        const slotCol = document.createElement('div');
+        slotCol.className = "flex-1";
+
+        if (bookingInSlot) {
+          const sMeta = STATUSES[bookingInSlot.status];
+          slotCol.innerHTML = `
+            <div onclick="editBooking('${bookingInSlot.id}')" class="cursor-pointer p-3 rounded-xl bg-brand-dark/90 border border-brand-gold/30 hover:border-brand-gold transition shadow-md">
+              <div class="flex flex-wrap items-center justify-between gap-2">
+                <div class="flex items-center space-x-2">
+                  <span class="font-bold text-brand-goldLight text-sm">${bookingInSlot.time} — ${bookingInSlot.clientName}</span>
+                  <span class="text-xs text-brand-textMuted">(${bookingInSlot.clientPhone})</span>
+                </div>
+                <span class="px-2.5 py-0.5 rounded-full text-xs border ${sMeta.color}">${sMeta.label}</span>
+              </div>
+              <div class="mt-2 text-xs text-brand-textMuted flex flex-wrap gap-x-4 gap-y-1">
+                <span class="text-brand-gold">Процедура: ${SERVICES[bookingInSlot.service]?.title || bookingInSlot.service}</span>
+                <span>Тайминг: ${bookingInSlot.duration} мин (+${bookingInSlot.buffer} мин буфер)</span>
+                ${bookingInSlot.pigment ? `<span class="text-amber-200/80">Пигмент: ${bookingInSlot.pigment}</span>` : ''}
+              </div>
+            </div>
+          `;
+        } else {
+          slotCol.innerHTML = `
+            <button onclick="quickBookSlot('${selectedDate}', '${hourStr}')" class="w-full text-left py-1 text-xs text-brand-textMuted/40 group-hover:text-brand-gold/70 transition flex items-center space-x-2">
+              <i data-lucide="plus-circle" class="w-3.5 h-3.5"></i>
+              <span>Свободно — кликните для записи</span>
+            </button>
+          `;
+        }
+
+        row.appendChild(slotCol);
+        container.appendChild(row);
+      }
+      lucide.createIcons();
+    }
+
+    function quickBookSlot(date, time) {
+      openBookingModal();
+      document.getElementById('book-date').value = date;
+      document.getElementById('book-time').value = time;
+    }
+
+    function updateServiceDuration() {
+      const sKey = document.getElementById('book-service').value;
+      const conf = SERVICES[sKey];
+      document.getElementById('book-duration-label').value = `${conf.duration} мин + ${conf.buffer} мин перерыв`;
+      document.getElementById('book-price').value = conf.price;
+    }
+
+    function openBookingModal(editId = null) {
+      const modal = document.getElementById('modal-booking');
+      const form = document.getElementById('booking-form');
+      form.reset();
+      state.currentPhotos = { before: null, after: null };
+      renderPhotoPreviews();
+
+      if (editId) {
+        const item = state.bookings.find(b => b.id === editId);
+        if (!item) return;
+        document.getElementById('modal-booking-title').innerText = 'Редактирование визита';
+        document.getElementById('book-id').value = item.id;
+        document.getElementById('book-name').value = item.clientName;
+        document.getElementById('book-phone').value = item.clientPhone;
+        document.getElementById('book-service').value = item.service;
+        document.getElementById('book-date').value = item.date;
+        document.getElementById('book-time').value = item.time;
+        document.getElementById('book-status').value = item.status;
+        document.getElementById('book-prepay').value = item.prepay || '';
+        document.getElementById('book-price').value = item.price || '';
+        document.getElementById('tech-pigment').value = item.pigment || '';
+        document.getElementById('tech-needle').value = item.needle || '';
+        document.getElementById('tech-retention').value = item.retention || '';
+        document.getElementById('tech-contra').value = item.contra || '';
+
+        state.currentPhotos = { before: item.photoBefore || null, after: item.photoAfter || null };
+        renderPhotoPreviews();
+
+        document.getElementById('btn-delete-booking').classList.remove('hidden');
+      } else {
+        document.getElementById('modal-booking-title').innerText = 'Новая запись в расписание';
+        document.getElementById('book-id').value = '';
+        document.getElementById('btn-delete-booking').classList.add('hidden');
+        updateServiceDuration();
+      }
+
+      modal.classList.remove('hidden');
+      lucide.createIcons();
+    }
+
+    function editBooking(id) {
+      openBookingModal(id);
+    }
+
+    function saveBooking(e) {
+      e.preventDefault();
+      const id = document.getElementById('book-id').value || 'b_' + Date.now();
+      const sKey = document.getElementById('book-service').value;
+
+      const record = {
+        id: id,
+        clientName: document.getElementById('book-name').value.trim(),
+        clientPhone: document.getElementById('book-phone').value.trim(),
+        service: sKey,
+        duration: SERVICES[sKey].duration,
+        buffer: SERVICES[sKey].buffer,
+        date: document.getElementById('book-date').value,
+        time: document.getElementById('book-time').value,
+        status: document.getElementById('book-status').value,
+        prepay: document.getElementById('book-prepay').value,
+        price: document.getElementById('book-price').value,
+        pigment: document.getElementById('tech-pigment').value.trim(),
+        needle: document.getElementById('tech-needle').value.trim(),
+        retention: document.getElementById('tech-retention').value.trim(),
+        contra: document.getElementById('tech-contra').value.trim(),
+        photoBefore: state.currentPhotos.before,
+        photoAfter: state.currentPhotos.after
+      };
+
+      const existingIndex = state.bookings.findIndex(b => b.id === id);
+      if (existingIndex >= 0) {
+        state.bookings[existingIndex] = record;
+      } else {
+        state.bookings.push(record);
+      }
+
+      saveState();
+      closeModal('modal-booking');
+      renderCalendarDay();
+      renderClientsList();
+      renderRetention();
+    }
+
+    function deleteCurrentBooking() {
+      const id = document.getElementById('book-id').value;
+      if (!id || !confirm('Удалить эту запись из календаря?')) return;
+      state.bookings = state.bookings.filter(b => b.id !== id);
+      saveState();
+      closeModal('modal-booking');
+      renderCalendarDay();
+      renderClientsList();
+      renderRetention();
+    }
+
+    function closeModal(id) {
+      document.getElementById(id).classList.add('hidden');
+    }
+
+    // Фото До/После в Base64 для моментального локального предпросмотра
+    function previewImage(event, type) {
+      const file = event.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        state.currentPhotos[type] = e.target.result;
+        renderPhotoPreviews();
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function renderPhotoPreviews() {
+      const bBox = document.getElementById('preview-before-box');
+      const aBox = document.getElementById('preview-after-box');
+      
+      bBox.innerHTML = state.currentPhotos.before 
+        ? `<img src="${state.currentPhotos.before}" class="w-full h-full object-cover">` 
+        : `<span class="text-[10px] text-brand-textMuted">Нет фото</span>`;
+
+      aBox.innerHTML = state.currentPhotos.after 
+        ? `<img src="${state.currentPhotos.after}" class="w-full h-full object-cover">` 
+        : `<span class="text-[10px] text-brand-textMuted">Нет фото</span>`;
+    }
+
+    // Раздел Входящих с сайта
+    // Подключение к базе Supabase
+const SUPABASE_URL = 'https://kclezkfqmtsqnmgzrlts.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_RH1aTz0ktLo-euycIJFwmg_owmKt5TP';
+const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+    // Загрузка реальных заявок из облака
+    async function fetchLeadsFromCloud() {
+      const { data, error } = await db
+        .from('leads')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      if (error) {
+        console.error('Ошибка загрузки заявок:', error);
+        return;
+      }
+
+      state.leads = (data || []).map(item => ({
+        id: item.id,
+        name: item.name,
+        phone: item.phone,
+        serviceKey: (item.service_title || '').toLowerCase().includes('губ') ? 'lips' : 'eyebrows',
+        serviceTitle: item.service_title || 'Перманентный макияж',
+        comment: item.comment || 'Заявка с сайта didi-permanent.ru',
+        date: new Date(item.created_at).toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit', day: '2-digit', month: 'short' })
+      }));
+
+      renderLeads();
+      updateBadges();
+    }
+
+    // Живое отслеживание новых заявок в реальном времени
+    function subscribeToNewLeads() {
+     db
+  .channel('realtime_leads')
+        .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'leads' }, () => {
+          fetchLeadsFromCloud();
+        })
+        .subscribe();
+    }
+    function renderLeads() {
+      const list = document.getElementById('leads-list');
+      list.innerHTML = '';
+
+      if (state.leads.length === 0) {
+        list.innerHTML = `<div class="col-span-full p-8 text-center text-brand-textMuted text-sm border border-dashed border-brand-border rounded-2xl">Нет новых заявок с сайта. Нажмите кнопку выше для генерации тестового лида.</div>`;
+        return;
+      }
+
+      state.leads.forEach(lead => {
+        const card = document.createElement('div');
+        card.className = "p-4 rounded-xl bg-brand-card border border-brand-border hover:border-brand-gold/50 transition flex flex-col justify-between space-y-4 shadow-lg";
+        card.innerHTML = `
+          <div>
+            <div class="flex justify-between items-start">
+              <span class="text-xs px-2 py-0.5 rounded bg-brand-gold/20 text-brand-gold border border-brand-gold/30">Квиз лендинга</span>
+              <span class="text-[11px] text-brand-textMuted">${lead.date}</span>
+            </div>
+            <h4 class="text-base font-bold text-white mt-2">${lead.name}</h4>
+            <p class="text-xs text-brand-gold font-medium mt-0.5">${lead.phone}</p>
+            <div class="mt-3 text-xs bg-brand-dark/70 p-2.5 rounded-lg border border-brand-border/40 text-brand-textMuted space-y-1">
+              <div><strong class="text-white">Интересует:</strong> ${lead.serviceTitle}</div>
+              <div><strong class="text-white">Пожелания:</strong> ${lead.comment || 'Скидка 1000 ₽ с квиза'}</div>
+            </div>
+          </div>
+          <div class="flex space-x-2 pt-2 border-t border-brand-border/40">
+            <button onclick="convertLeadToBooking('${lead.id}')" class="flex-1 bg-brand-gold hover:bg-brand-goldLight text-brand-dark font-semibold py-1.5 px-2 rounded-lg text-xs transition">Записать в график</button>
+            <button onclick="dismissLead('${lead.id}')" class="text-brand-textMuted hover:text-rose-400 p-1.5"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+          </div>
+        `;
+        list.appendChild(card);
+      });
+      lucide.createIcons();
+    }
+
+    function addMockLead() {
+      const mockServices = [
+        { key: 'eyebrows', title: 'Пудровые брови' },
+        { key: 'lips', title: 'Акварельные губы' }
+      ];
+      const randomS = mockServices[Math.floor(Math.random() * mockServices.length)];
+      const names = ['Анна Семенова', 'Елена Григорьева', 'Ольга Васильева', 'Мария Николаева'];
+      const randomName = names[Math.floor(Math.random() * names.length)];
+
+      const newLead = {
+        id: 'lead_' + Date.now(),
+        name: randomName,
+        phone: `+7 (927) ${Math.floor(100 + Math.random() * 899)}-${Math.floor(10 + Math.random() * 89)}-${Math.floor(10 + Math.random() * 89)}`,
+        serviceKey: randomS.key,
+        serviceTitle: randomS.title,
+        comment: 'Хочет натуральный эффект, интересуется свободными окошками на субботу',
+        date: 'Только что'
+      };
+
+      state.leads.unshift(newLead);
+      saveState();
+      renderLeads();
+    }
+
+    function convertLeadToBooking(leadId) {
+      const lead = state.leads.find(l => l.id == leadId);
+      if (!lead) return;
+      openBookingModal();
+      document.getElementById('book-name').value = lead.name;
+      document.getElementById('book-phone').value = lead.phone;
+      if (lead.serviceKey) {
+        document.getElementById('book-service').value = lead.serviceKey;
+        updateServiceDuration();
+      }
+      dismissLead(leadId, false);
+    }
+
+    // Удаление заявки из базы Supabase
+    async function dismissLead(leadId, confirmPrompt = true) {
+      if (confirmPrompt && !confirm('Удалить эту заявку?')) return;
+
+      const { error } = await db
+        .from('leads')
+        .delete()
+        .eq('id', leadId);
+
+      if (!error) {
+        state.leads = state.leads.filter(l => l.id != leadId);
+        renderLeads();
+        updateBadges();
+      } else {
+        console.error('Ошибка при удалении из базы:', error);
+      }
+    }
+
+    // Клиентская база и карточки
+    function renderClientsList() {
+      const search = (document.getElementById('client-search')?.value || '').toLowerCase();
+      const tbody = document.getElementById('clients-table-body');
+      tbody.innerHTML = '';
+
+      // Группируем визиты по телефону (уникальный ключ клиента)
+      const clientsMap = {};
+      state.bookings.forEach(b => {
+        if (!clientsMap[b.clientPhone]) {
+          clientsMap[b.clientPhone] = {
+            name: b.clientName,
+            phone: b.clientPhone,
+            contra: b.contra || 'Нет',
+            visits: []
+          };
+        }
+        clientsMap[b.clientPhone].visits.push(b);
+      });
+
+      const clients = Object.values(clientsMap).filter(c => 
+        c.name.toLowerCase().includes(search) || c.phone.includes(search)
+      );
+
+      if (clients.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="5" class="p-6 text-center text-brand-textMuted text-xs">Клиенты не найдены</td></tr>`;
+        return;
+      }
+
+      clients.forEach(c => {
+        const tr = document.createElement('tr');
+        tr.className = "hover:bg-brand-cardHover/40 transition";
+        tr.innerHTML = `
+          <td class="p-4 font-semibold text-white">${c.name}</td>
+          <td class="p-4 text-brand-gold">${c.phone}</td>
+          <td class="p-4"><span class="px-2 py-0.5 rounded-full bg-brand-border text-xs text-brand-goldLight">${c.visits.length}</span></td>
+          <td class="p-4 text-xs text-brand-textMuted max-w-xs truncate">${c.contra}</td>
+          <td class="p-4 text-right">
+            <button onclick="viewClientCard('${c.phone}')" class="text-xs bg-brand-gold/15 hover:bg-brand-gold text-brand-gold hover:text-brand-dark px-3 py-1.5 rounded-lg border border-brand-gold/30 font-medium transition">
+              Техкарта
+            </button>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+      lucide.createIcons();
+    }
+
+    function viewClientCard(phone) {
+      const visits = state.bookings.filter(b => b.clientPhone === phone);
+      if (visits.length === 0) return;
+
+      const client = visits[0];
+      document.getElementById('card-client-name').innerText = client.clientName;
+      document.getElementById('card-client-phone').innerText = client.clientPhone;
+
+      const histContainer = document.getElementById('card-client-history');
+      histContainer.innerHTML = '';
+
+      visits.forEach((v, idx) => {
+        const div = document.createElement('div');
+        div.className = "bg-brand-dark p-4 rounded-xl border border-brand-border space-y-3";
+        div.innerHTML = `
+          <div class="flex justify-between items-center border-b border-brand-border/40 pb-2">
+            <span class="font-bold text-brand-gold text-sm">Визит #${visits.length - idx} (${v.date})</span>
+            <span class="text-xs px-2 py-0.5 rounded border ${STATUSES[v.status]?.color || ''}">${STATUSES[v.status]?.label || v.status}</span>
+          </div>
+          <div class="grid grid-cols-2 gap-2 text-xs text-brand-textMuted">
+            <div><strong class="text-white">Процедура:</strong> ${SERVICES[v.service]?.title || v.service}</div>
+            <div><strong class="text-white">Пигмент / микс:</strong> ${v.pigment || '—'}</div>
+            <div><strong class="text-white">Конфигурация иглы:</strong> ${v.needle || '—'}</div>
+            <div><strong class="text-white">Остаток цвета:</strong> ${v.retention || '—'}</div>
+          </div>
+          ${(v.photoBefore || v.photoAfter) ? `
+            <div class="pt-2 flex gap-3">
+              ${v.photoBefore ? `<div class="w-24 h-24 rounded border border-brand-border overflow-hidden"><img src="${v.photoBefore}" class="w-full h-full object-cover"></div>` : ''}
+              ${v.photoAfter ? `<div class="w-24 h-24 rounded border border-brand-border overflow-hidden"><img src="${v.photoAfter}" class="w-full h-full object-cover"></div>` : ''}
+            </div>
+          ` : ''}
+        `;
+        histContainer.appendChild(div);
+      });
+
+      document.getElementById('modal-client-card').classList.remove('hidden');
+      lucide.createIcons();
+    }
+
+    // Вкладка: Напоминания о коррекции (30-45 дней)
+    function renderRetention() {
+      const container = document.getElementById('retention-list');
+      container.innerHTML = '';
+      const now = new Date();
+
+      const candidates = state.bookings.filter(b => {
+        if (b.status !== 'completed' || b.service === 'correction' || b.service === 'consultation') return false;
+        const diffDays = Math.floor((now - new Date(b.date)) / (1000 * 60 * 60 * 24));
+        return diffDays >= 30 && diffDays <= 45;
+      });
+
+      if (candidates.length === 0) {
+        container.innerHTML = `<div class="p-8 text-center text-brand-textMuted text-sm border border-dashed border-brand-border rounded-2xl">На текущий момент нет клиентов с окном первичной процедуры в 30–45 дней.</div>`;
+        return;
+      }
+
+      candidates.forEach(c => {
+        const diffDays = Math.floor((now - new Date(c.date)) / (1000 * 60 * 60 * 24));
+        const item = document.createElement('div');
+        item.className = "p-4 rounded-xl bg-brand-card border border-brand-border flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4";
+        item.innerHTML = `
+          <div>
+            <div class="flex items-center space-x-2">
+              <h4 class="font-bold text-white text-base">${c.clientName}</h4>
+              <span class="text-xs px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/30">Прошло ${diffDays} дней</span>
+            </div>
+            <p class="text-xs text-brand-gold mt-0.5">${c.clientPhone}</p>
+            <p class="text-xs text-brand-textMuted mt-1">Первичная процедура: ${SERVICES[c.service]?.title} (${c.date})</p>
+          </div>
+          <div class="flex space-x-2">
+            <a href="https://wa.me/${c.clientPhone.replace(/\D/g,'')}?text=${encodeURIComponent('Здравствуйте, ' + c.clientName + '! Прошел месяц с нашей процедуры. Пора оценить остаток цвета и записаться на коррекцию :)')}" target="_blank" class="px-3 py-1.5 bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 border border-emerald-500/40 rounded-lg text-xs font-semibold flex items-center space-x-1.5 transition">
+              <i data-lucide="message-circle" class="w-3.5 h-3.5"></i>
+              <span>Написать в WhatsApp</span>
+            </a>
+            <button onclick="bookCorrection('${c.clientName}', '${c.clientPhone}')" class="px-3 py-1.5 bg-brand-gold hover:bg-brand-goldLight text-brand-dark font-semibold rounded-lg text-xs transition">
+              Записать на коррекцию
+            </button>
+          </div>
+        `;
+        container.appendChild(item);
+      });
+      lucide.createIcons();
+    }
+
+    function bookCorrection(name, phone) {
+      openBookingModal();
+      document.getElementById('book-name').value = name;
+      document.getElementById('book-phone').value = phone;
+      document.getElementById('book-service').value = 'correction';
+      updateServiceDuration();
+    }
+
+    // Демо-данные для первоначального запуска
+    function seedDemoData(today) {
+      const pastDate = new Date();
+      pastDate.setDate(pastDate.getDate() - 34); // 34 дня назад (попадёт в фильтр коррекции)
+      const pastDateStr = pastDate.toISOString().split('T')[0];
+
+      state.bookings = [
+        {
+          id: 'demo_1',
+          clientName: 'Ксения Соколова',
+          clientPhone: '+7 (917) 650-44-22',
+          service: 'eyebrows',
+          duration: 150,
+          buffer: 20,
+          date: today,
+          time: '10:00',
+          status: 'confirmed',
+          prepay: '1000',
+          price: '6000',
+          pigment: 'Hanafy Брови №2 (Dark Brunette) + капля №4',
+          needle: 'Defenderr 1R 0.25 / 4.0 ход',
+          retention: '',
+          contra: 'Аллергии нет, кожа склонна к жирности в Т-зоне'
+        },
+        {
+          id: 'demo_2',
+          clientName: 'Татьяна Морозова',
+          clientPhone: '+7 (927) 888-11-33',
+          service: 'lips',
+          duration: 150,
+          buffer: 20,
+          date: today,
+          time: '14:00',
+          status: 'prepaid',
+          prepay: '1000',
+          price: '6000',
+          pigment: 'Face Kiss + Малина 1:1',
+          needle: '1R 0.30',
+          retention: '',
+          contra: 'Склонность к герпесу (пропит Ацикловир)'
+        },
+        {
+          id: 'demo_retention',
+          clientName: 'Алена Воронова',
+          clientPhone: '+7 (903) 322-11-00',
+          service: 'eyebrows',
+          duration: 150,
+          buffer: 20,
+          date: pastDateStr,
+          time: '11:00',
+          status: 'completed',
+          prepay: '1000',
+          price: '6000',
+          pigment: 'Hanafy №3',
+          needle: '1R 0.25',
+          retention: 'Ждем заживления',
+          contra: 'Нет'
+        }
+      ];
+
+      state.leads = [
+        {
+          id: 'lead_demo',
+          name: 'Юлия Ковалева',
+          phone: '+7 (937) 555-88-99',
+          serviceKey: 'lips',
+          serviceTitle: 'Акварельные губы',
+          comment: 'Хочет нежный нюдовый оттенок, заявка с лендинга didi-permanent.ru',
+          date: '10 минут назад'
+        }
+      ];
+
+      saveState();
+    }
+    // Настройка безопасности CRM
+const CORRECT_PIN = '2759'; // ВВЕДИТЕ СЮДА СВОЙ ПИН-КОД (любые 4-6 цифр)
+
+function checkPin() {
+  const pinInput = document.getElementById('pin-input');
+  const errorEl = document.getElementById('pin-error');
+  
+  if (pinInput.value === CORRECT_PIN) {
+    localStorage.setItem('crm_authorized', 'true');
+    document.getElementById('pin-screen').classList.add('hidden');
+  } else {
+    errorEl.classList.remove('hidden');
+    pinInput.value = '';
+  }
+}
+
+// Проверяем, вводился ли пин-код ранее на этом устройстве
+if (localStorage.getItem('crm_authorized') === 'true') {
+  document.getElementById('pin-screen').classList.add('hidden');
+}
+
+// Разрешаем вход по нажатию клавиши Enter
+document.getElementById('pin-input')?.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') checkPin();
+});
+  </script>
+</body>
+</html>
