@@ -1810,6 +1810,26 @@ document.querySelectorAll('.faq-question').forEach(question => {
         } catch (tableErr) {
             console.warn('Ошибка отправки в Google Таблицу:', tableErr);
         }
+        // 3. Отправка заявки в CRM (Supabase)
+    try {
+      fetch('https://kclezkfqmtsqnmgzrlts.supabase.co/rest/v1/leads', {
+        method: 'POST',
+        headers: {
+          'apikey': 'sb_publishable_RH1aTz0ktLo-euycIJFwmg_owmKt5TP',
+          'Authorization': 'Bearer sb_publishable_RH1aTz0ktLo-euycIJFwmg_owmKt5TP',
+          'Content-Type': 'application/json',
+          'Prefer': 'return=minimal'
+        },
+        body: JSON.stringify({
+          name: name,
+          phone: phone,
+          service_title: typeof answers !== 'undefined' && answers.step_1 ? answers.step_1 : 'Перманентный макияж',
+          comment: typeof answers !== 'undefined' ? Object.entries(answers).map(([k, v]) => `${k}: ${v}`).join('; ') : ''
+        })
+      });
+    } catch (crmErr) {
+      console.warn('Ошибка отправки в CRM:', crmErr);
+    }
     // Сброс кнопки и закрытие модалки
     submitBtn.innerText = originalText;
     submitBtn.disabled = false;
