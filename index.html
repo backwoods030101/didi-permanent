@@ -222,6 +222,24 @@
             list-style: none;
         }
 
+        .phone-link {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            margin-right: 4px;
+            transition: color 0.2s ease;
+        }
+
+        .phone-link:hover {
+            color: var(--accent-gold);
+        }
+
+        @media (max-width: 950px) {
+            .phone-link {
+                display: none;
+            }
+        }
         .nav-links a {
             text-decoration: none;
             color: var(--text-light);
@@ -1251,6 +1269,8 @@
                 <li><a href="#reviews">Отзывы</a></li>
             </ul>
             <div class="nav-contacts">
+                <!-- Телефон -->
+                <a href="tel:+79196584949" class="phone-link" title="Позвонить">+7 (919) 658-49-49</a>
                 <!-- Telegram -->
                 <a href="https://t.me/didishkaaaaaaaaaa" target="_blank" rel="noopener noreferrer" class="social-btn" title="Telegram">
                     <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor">
