@@ -195,9 +195,12 @@
     to { transform: translateX(-50%); }
 }
         .nav-wrap {
+            max-width: 1240px; /* расширяем общую ширину шапки */
+            margin: 0 auto;
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            justify-content: space-between;
+            padding: 15px 20px;
         }
 
         .logo h2 {
@@ -216,10 +219,11 @@
             display: block;
         }
 
-        .nav-links {
+       .nav-links {
             display: flex;
-            gap: 28px;
+            gap: 18px; /* уменьшаем расстояние между пунктами меню, чтобы они не переносились */
             list-style: none;
+            align-items: center;
         }
 
         .phone-link {
