@@ -25,7 +25,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <!-- Yandex.Metrika counter -->
-    <script type="text/javascript">
+    <script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=KVoCH7-kREVhRNQpV3oFckHmiMu_97vm6XPGcgmRip4HXu9BQxTkRK9H7rxw58wx6h-mkfb5zoYqR2Gi-niJdFlM1kExR7-fQ9QxKIjHqGSJb9E4SiWawcv_N_cJvv1CWGeLOxHHO6m04mfJKksb-Cmut50R_Z_sg_h7Bwk0QZCbHvxd-4n1fu9kCQtaexT2Pb9o_5EPd6Sa4HtCAfu0XMoUOTfyR8Ubr96ZoZP1tKo_1HNV1P09z_irrGwIkKVxCadR5w2SnjxiAN9g95_AwtcBi-A-rhFFhZBgtRq7PHl3_PllW6aYye47e-FqbiJezOPcMuy9G3UfW_3N3TFG09FGUG6FkTnvf6VJnj59Atup0fERVri9CYBi00471J1kjIrJc6ba3bKRAFD3A69UzyI5iuGjrRiY3f0q3jEoYCy6qDsJTj43fclyOOMmBctQkUnMxOaOuu_8PJ8bne6g_MxP0p-nUZJlNcsXR1CaMOIXzWZKR-VQY3Cc95f8eOFg8GVrWKRQhmJrARXlzSYAZRMwhsJLNfXwNysKoJewJqujFj9yUUImL0xHosEkvsgN9aKAp-WZoB-gDEEB6XlsA2hSHLvK3jNMYyAfMtSGnFO99Wjn8klzAG1PYObkIGgVmTm0KQwZB9palNemAgQeVyaKP0YYaj1G3DSXeBsBudY" charset="UTF-8"></script><script type="text/javascript">
         (function(m,e,t,r,i,k,a){
             m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
             m[i].l=1*new Date();
@@ -1790,10 +1790,10 @@
         const totalSteps = 5;
         const answers = {};
 
-        // Конфигурация Telegram и WhatsApp
-        const TG_BOT_TOKEN = "8848320511:AAEnpQx2Gw3mzngZyftz7z43xRI8XdCmZxE";
-        const TG_CHAT_ID = "637328406";
-        const MASTER_PHONE = "79XXXXXXXXX"; // Укажите номер мастера для WhatsApp (только цифры)
+        // Конфигурация: заявки уходят в Google Apps Script (строка в таблицу + дубль в Telegram).
+        // Токен бота хранится только в обработчике — на странице он больше не нужен.
+        const GS_WEBHOOK = "https://script.google.com/macros/s/AKfycbyE-thNuhS7ZtKUM-5dtwVaKhqX1tK6Jd2gocLbHtjcYmCanMtwdnLt3-NpJumgJ9EkXA/exec";
+        const MASTER_PHONE = "79196584949"; // Номер мастера для WhatsApp (только цифры)
 
         // --- Управление плашкой Cookie ---
         function checkCookies() {
@@ -1927,38 +1927,31 @@ document.querySelectorAll('.faq-question').forEach(question => {
 
     try {
 
-        // Запрос отправляется через серверный прокси Netlify без блокировок операторов
-        await fetch(`/tg-api/bot${TG_BOT_TOKEN}/sendMessage`, {
+        // Заявка уходит в Google Apps Script: строка в таблицу + дубль текста в Telegram.
+        // Обработчик сам шлёт сообщение ботом — отдельный прокси не нужен.
+        const tableResp = await fetch(GS_WEBHOOK, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
             body: JSON.stringify({
-                chat_id: TG_CHAT_ID,
-                text: messageText
+                name: name,
+                phone: phone,
+                service: typeof answers !== 'undefined' && answers.step_1 ? answers.step_1 : 'Перманентный макияж',
+                details: typeof answers !== 'undefined' ? Object.entries(answers).map(([k, v]) => `${k}: ${v}`).join('; ') : '',
+                contactMethod: typeof messenger !== 'undefined' ? messenger : 'Не указан',
+                tg_message: messageText
             })
         });
         if (typeof ym !== 'undefined') {
             ym(112725344, 'reachGoal', 'lead_sent');
         }
     } catch (error) {
-        console.warn('Ошибка при отправке в Telegram:', error);
+        console.warn('Ошибка при отправке заявки:', error);
+        alert('Не получилось отправить заявку автоматически. Пожалуйста, напишите нам в Telegram или WhatsApp — кнопки внизу страницы.');
+        submitBtn.innerText = originalText;
+        submitBtn.disabled = false;
+        return;
     }
-// Дублирование заявки в Google Таблицу
-        try {
-            fetch('https://script.google.com/macros/s/AKfycbw_f4uuy2vN1oH5UpY2mfwDKk8ttLXxQGVFFss5NaOUqK6-hYGFEhn0UFi7ZEO_fL1I9A/exec', {
-                method: 'POST',
-                mode: 'no-cors',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    name: name,
-                    phone: phone,
-                    service: typeof answers !== 'undefined' && answers.step_1 ? answers.step_1 : 'Перманентный макияж',
-                    details: typeof answers !== 'undefined' ? Object.entries(answers).map(([k, v]) => `${k}: ${v}`).join('; ') : '',
-                    contactMethod: typeof messenger !== 'undefined' ? messenger : 'Не указан'
-                })
-            });
-        } catch (tableErr) {
-            console.warn('Ошибка отправки в Google Таблицу:', tableErr);
-        }
         // 3. Отправка заявки в CRM (Supabase)
     try {
       fetch('https://kclezkfqmtsqnmgzrlts.supabase.co/rest/v1/leads', {
