@@ -607,19 +607,18 @@ ym(112725344,'init',{ssr:true,webvisor:true,clickmap:true,accurateTrackBounce:tr
 <script>
 /* =========================================================
    НАСТРОЙКИ — ВСЁ МЕНЯЕТСЯ ЗДЕСЬ, В ОДНОМ МЕСТЕ.
-   Токен бота, chat_id, Google-таблица и CRM подставлены
-   из вашего основного сайта — менять не нужно.
+   Токен бота больше НЕ нужен на сайте: заявка уходит в
+   Google Apps Script (GS_WEBHOOK), а он пишет в таблицу
+   и сам дублирует её в ваш Telegram.
    ЗАМЕНИТЕ только телефон и ник Telegram ниже.
    ========================================================= */
 const CONFIG = {
-  TG_BOT_TOKEN: '8848320511:AAEnpQx2Gw3mzngZyftz7z43xRI8XdCmZxE', // как на основном сайте
-  TG_CHAT_ID:   '637328406',                                        // как на основном сайте
-  GS_WEBHOOK:   'https://script.google.com/macros/s/AKfycbw_f4uuy2vN1oH5UpY2mfwDKk8ttLXxQGVFFss5NaOUqK6-hYGFEhn0UFi7ZEO_fL1I9A/exec',
+  GS_WEBHOOK:   'https://script.google.com/macros/s/AKfycbyE-thNuhS7ZtKUM-5dtwVaKhqX1tK6Jd2gocLbHtjcYmCanMtwdnLt3-NpJumgJ9EkXA/exec',
   SUPABASE_URL: 'https://kclezkfqmtsqnmgzrlts.supabase.co/rest/v1/leads',
   SUPABASE_KEY: 'sb_publishable_RH1aTz0ktLo-euycIJFwmg_owmKt5TP',
-  PHONE_TEL:     '+79196584949',      // ЗАМЕНИТЕ: ваш номер для звонка (только цифры с +7)
-  PHONE_DISPLAY: '+7 (919) 658-49-49',// ЗАМЕНИТЕ: ваш номер как он выглядит на сайте
-  TG_USERNAME:   'didi_permanent'     // ЗАМЕНИТЕ: ваш ник в Telegram (без @)
+  PHONE_TEL:     '+79196584949',      // ваш номер для звонка (только цифры с +7)
+  PHONE_DISPLAY: '+7 (919) 658-49-49',// ваш номер как он выглядит на сайте
+  TG_USERNAME:   'didi_permanent'     // ваш ник в Telegram (без @)
 };
 
 /* Подставляем телефон и Telegram-ссылки из CONFIG */
@@ -635,23 +634,15 @@ const CONFIG = {
   });
 })();
 
-/* Отправка текста в Telegram через серверный прокси Netlify (как на основном сайте) */
-async function sendToTelegram(text){
-  const r = await fetch(`/tg-api/bot${CONFIG.TG_BOT_TOKEN}/sendMessage`, {
-    method:'POST',
-    headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({chat_id:CONFIG.TG_CHAT_ID, text})
-  });
-  if(!r.ok) throw new Error('Telegram HTTP ' + r.status);
-}
-
-/* Дублирование в Google Таблицу (как на основном сайте) */
+/* Отправка заявки в Google Apps Script: он пишет строку в таблицу
+   и дублирует её вам в Telegram (токен бота хранится в скрипте).
+   Поле tg_message — текст, который скрипт перешлёт в Telegram. */
 function sendToGoogleSheet(row){
-  fetch(CONFIG.GS_WEBHOOK, {
+  return fetch(CONFIG.GS_WEBHOOK, {
     method:'POST', mode:'no-cors',
-    headers:{'Content-Type':'application/json'},
+    headers:{'Content-Type':'text/plain;charset=utf-8'},
     body:JSON.stringify(row)
-  }).catch(e=>console.warn('Google Sheet:', e));
+  });
 }
 
 /* Дублирование в CRM Supabase (как на основном сайте) */
@@ -801,12 +792,13 @@ $('#quizNext').addEventListener('click', async ()=>{
 🔗 Кампания: ${utm.utm_campaign || '—'}`;
 
   try{
-    await sendToTelegram(messageText);
-    sendToGoogleSheet({
+    // Заявка уходит в Google Apps Script: строка в таблицу + дубль в Telegram
+    await sendToGoogleSheet({
       name, phone,
       service: 'Комплекс Брови + Губы (8 000 ₽)',
       details: `Страница: /combo/; Старый перманент: ${answers[1]||'—'}; Эффект: ${answers[2]||'—'}; День: ${answers[3]||'—'}; UTM: ${JSON.stringify(utm)}`,
-      contactMethod: messenger
+      contactMethod: messenger,
+      tg_message: messageText
     });
     sendToCRM({
       name, phone,
