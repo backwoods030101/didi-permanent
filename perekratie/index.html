@@ -671,6 +671,39 @@ $('#vPhone').addEventListener('input', e=>{
   e.target.value = p ? `+7${p[2]?' ('+p[2]:''}${p[3]?') '+p[3]:''}${p[4]?'-'+p[4]:''}${p[5]?'-'+p[5]:''}` : '';
 });
 
+/* ---- Сжатие фото перед отправкой ----
+   Фото с телефона весят 3–10 МБ — сжимаем до ~300–500 КБ,
+   иначе webhook не примет письмо такого размера. */
+function compressImage(file, maxSide = 1280, quality = 0.82){
+  return new Promise((resolve, reject)=>{
+    const img = new Image();
+    const url = URL.createObjectURL(file);
+    img.onload = ()=>{
+      let w = img.width, h = img.height;
+      if(Math.max(w, h) > maxSide){
+        const k = maxSide / Math.max(w, h);
+        w = Math.round(w * k); h = Math.round(h * k);
+      }
+      const c = document.createElement('canvas');
+      c.width = w; c.height = h;
+      c.getContext('2d').drawImage(img, 0, 0, w, h);
+      URL.revokeObjectURL(url);
+      resolve(c.toDataURL('image/jpeg', quality));
+    };
+    img.onerror = (e)=>{ URL.revokeObjectURL(url); reject(e); };
+    img.src = url;
+  });
+}
+
+async function photosToBase64(files){
+  const out = [];
+  for(const f of files.slice(0, 5)){
+    try{ out.push(await compressImage(f)); }
+    catch(_){ /* файл не картинка — пропускаем */ }
+  }
+  return out;
+}
+
 /* ---- FAQ аккордеон ---- */
 $$('.faq-item').forEach(item=>{
   item.querySelector('.faq-q').addEventListener('click', ()=>{
@@ -699,9 +732,12 @@ $('#verdictForm').addEventListener('submit', async e=>{
   const phone = $('#vPhone').value.trim();
   const messenger = $('#vMessenger').value;
   const comment = $('#vComment').value.trim();
-  const photos = fileInput.files ? [...fileInput.files] : [];
+  const photoFiles = fileInput.files ? [...fileInput.files] : [];
   let utm = {};
   try{ utm = JSON.parse(localStorage.getItem('didi_utm')||'{}'); }catch(_){}
+
+  btn.textContent = 'Обрабатываем фото…';
+  const photos = await photosToBase64(photoFiles);
 
   const messageText =
 `🔥 ЗАЯВКА — ВЕРДИКТ ПО ФОТО (/perekratie/)
@@ -709,18 +745,19 @@ $('#verdictForm').addEventListener('submit', async e=>{
 👤 Имя: ${name}
 📞 Телефон: ${phone}
 💬 Куда ответить: ${messenger}
-📎 Фото прикреплено: ${photos.length} шт.
+📎 Фото прикреплено: ${photoFiles.length} шт.
 📝 Комментарий: ${comment || '—'}
 🔗 UTM: ${utm.utm_content || '—'} / ${utm.utm_campaign || '—'}`;
 
   try{
-    // Заявка уходит в Google Apps Script: строка в таблицу + дубль в Telegram
+    // Заявка уходит в Google Apps Script: строка в таблицу + дубль в Telegram + фото в Telegram
     await sendToGoogleSheet({
       name, phone,
       service: 'Вердикт по фото — исправление татуажа',
-      details: `Страница: /perekratie/; Фото: ${photos.length} шт.; Комментарий: ${comment||'—'}; UTM: ${JSON.stringify(utm)}`,
+      details: `Страница: /perekratie/; Фото: ${photoFiles.length} шт.; Комментарий: ${comment||'—'}; UTM: ${JSON.stringify(utm)}`,
       contactMethod: messenger,
-      tg_message: messageText
+      tg_message: messageText,
+      photos: photos
     });
     sendToCRM({
       name, phone,
