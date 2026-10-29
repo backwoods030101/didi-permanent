@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Исправление старого татуажа в Чебоксарах — честный вердикт по фото | DIDI PERMANENT</title>
+<meta name="description" content="Старый перманент синеет или выглядит как маска? Бесплатная честная оценка по фото за 15 минут: перекроем мягко или скажем, что пора удалять. Чебоксары, мастер Диана Емельянова.">
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg-deep:#140907;
+  --text-light:#F7EFE6;
+  --text-muted:#C7B6A6;
+  --accent-gold:#D1AA74;
+  --accent-gold-hover:#E4C394;
+  --glass-bg:rgba(30,16,13,.58);
+  --glass-bg-hover:rgba(48,26,21,.75);
+  --glass-border:rgba(209,170,116,.3);
+  --glass-border-hover:rgba(209,170,116,.6);
+  --btn-grad:linear-gradient(135deg,#D1AA74 0%,#997143 100%);
+  --gold-grad:linear-gradient(135deg,#FFF3E3 0%,#D1AA74 100%);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Montserrat',sans-serif;
+  color:var(--text-light);
+  line-height:1.6;
+  overflow-x:hidden;
+  background-color:var(--bg-deep);
+  background-image:
+    radial-gradient(circle at 50% 8%, rgba(140,85,68,.30) 0%, transparent 55%),
+    radial-gradient(circle at 85% 45%, rgba(170,105,85,.20) 0%, transparent 50%),
+    radial-gradient(circle at 12% 80%, rgba(130,78,62,.22) 0%, transparent 55%);
+  background-attachment:fixed;
+}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+.container{max-width:1140px;margin:0 auto;padding:0 22px}
+.grad-text{background:var(--gold-grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* ---------- Шапка ---------- */
+.header{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  background:rgba(20,9,7,.82);backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--glass-border);
+}
+.header-inner{display:flex;align-items:center;justify-content:space-between;height:66px}
+.logo{font-weight:800;font-size:17px;letter-spacing:3px}
+.logo span{color:var(--accent-gold)}
+.header-phone{font-size:14px;font-weight:600;color:var(--text-muted)}
+.header-phone b{color:var(--text-light)}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  background:var(--btn-grad);color:#1d0f0a;
+  font-family:inherit;font-weight:700;font-size:14px;
+  padding:14px 30px;border:none;border-radius:12px;cursor:pointer;
+  transition:transform .25s ease, box-shadow .25s ease;
+  box-shadow:0 8px 24px rgba(209,170,116,.22);
+}
+.btn:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(209,170,116,.34)}
+.btn-sm{padding:10px 20px;font-size:13px}
+.btn-ghost{
+  background:transparent;color:var(--accent-gold);
+  border:1px solid var(--glass-border-hover);box-shadow:none;
+}
+.btn-ghost:hover{background:rgba(209,170,116,.12);box-shadow:none}
+
+/* ---------- Hero ---------- */
+.hero{padding:150px 0 80px;position:relative}
+.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center}
+.eyebrow{
+  display:inline-block;font-size:12px;font-weight:600;letter-spacing:2.5px;
+  text-transform:uppercase;color:var(--accent-gold);
+  border:1px solid var(--glass-border);border-radius:100px;
+  padding:8px 18px;margin-bottom:22px;
+}
+.hero h1{font-size:42px;font-weight:800;line-height:1.18;margin-bottom:20px}
+.hero-sub{font-size:17px;color:var(--text-muted);max-width:520px;margin-bottom:30px}
+.hero-sub b{color:var(--text-light)}
+.hero-cta{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:28px}
+.trust{display:flex;flex-direction:column;gap:9px}
+.trust li{
+  list-style:none;font-size:13.5px;color:var(--text-muted);
+  display:flex;align-items:flex-start;gap:10px;
+}
+.trust li::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--accent-gold);margin-top:7px;flex-shrink:0}
+.hero-photo{position:relative}
+.hero-photo img{
+  width:100%;height:520px;object-fit:cover;border-radius:22px;
+  border:1px solid var(--glass-border);
+}
+.hero-photo::after{
+  content:"";position:absolute;inset:-14px;border-radius:28px;
+  border:1px solid var(--glass-border);pointer-events:none;
+}
+.photo-badge{
+  position:absolute;left:-18px;bottom:34px;
+  background:var(--glass-bg);backdrop-filter:blur(12px);
+  border:1px solid var(--glass-border-hover);border-radius:16px;
+  padding:14px 20px;font-size:13px;max-width:250px;
+}
+.photo-badge b{color:var(--accent-gold);display:block;font-size:14px;margin-bottom:3px}
+
+/* ---------- Секции ---------- */
+.section{padding:86px 0}
+.sec-head{max-width:680px;margin-bottom:48px}
+.sec-head.center{margin-left:auto;margin-right:auto;text-align:center}
+.sec-tag{
+  font-size:12px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;
+  color:var(--accent-gold);display:block;margin-bottom:14px;
+}
+.sec-title{font-size:32px;font-weight:800;line-height:1.25;margin-bottom:16px}
+.sec-sub{font-size:16px;color:var(--text-muted)}
+
+/* Боль */
+.pain-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.pain-card{
+  background:var(--glass-bg);border:1px solid var(--glass-border);
+  border-radius:18px;padding:26px 24px;backdrop-filter:blur(10px);
+  transition:border-color .3s, background .3s;
+}
+.pain-card:hover{border-color:var(--glass-border-hover);background:var(--glass-bg-hover)}
+.pain-card .num{font-size:13px;font-weight:700;color:var(--accent-gold);margin-bottom:12px;display:block}
+.pain-card p{font-size:14.5px;color:var(--text-muted);line-height:1.65}
+
+/* Честность */
+.honest-wrap{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.honest-col{border-radius:20px;padding:32px 30px;border:1px solid var(--glass-border)}
+.honest-col.do{background:rgba(209,170,116,.07)}
+.honest-col.dont{background:rgba(120,40,40,.12)}
+.honest-col h3{font-size:19px;margin-bottom:20px}
+.honest-col.do h3{color:var(--accent-gold)}
+.honest-col.dont h3{color:#E8A0A0}
+.honest-col ul{list-style:none;display:flex;flex-direction:column;gap:14px}
+.honest-col li{font-size:14.5px;color:var(--text-muted);display:flex;gap:12px;line-height:1.6}
+.honest-col li i{font-style:normal;font-weight:700;flex-shrink:0}
+.honest-col.do li i{color:var(--accent-gold)}
+.honest-col.dont li i{color:#E8A0A0}
+
+/* Шаги вердикта */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;counter-reset:step}
+.step{
+  position:relative;background:var(--glass-bg);border:1px solid var(--glass-border);
+  border-radius:18px;padding:58px 26px 28px;backdrop-filter:blur(10px);
+}
+.step::before{
+  counter-increment:step;content:counter(step);
+  position:absolute;top:22px;left:26px;
+  width:38px;height:38px;border-radius:50%;
+  background:var(--btn-grad);color:#1d0f0a;
+  display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px;
+}
+.step h4{font-size:16.5px;margin-bottom:10px}
+.step p{font-size:14px;color:var(--text-muted)}
+
+/* Форма вердикта */
+.verdict{
+  background:var(--glass-bg);border:1px solid var(--glass-border-hover);
+  border-radius:24px;padding:44px;backdrop-filter:blur(12px);
+  display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:start;
+}
+.verdict h2{font-size:28px;font-weight:800;line-height:1.25;margin-bottom:16px}
+.verdict .lead{font-size:15px;color:var(--text-muted);margin-bottom:24px}
+.verdict-perks{list-style:none;display:flex;flex-direction:column;gap:12px;margin-bottom:26px}
+.verdict-perks li{font-size:14px;color:var(--text-muted);display:flex;gap:10px}
+.verdict-perks li::before{content:"✦";color:var(--accent-gold)}
+.tg-fallback{font-size:13px;color:var(--text-muted)}
+.tg-fallback a{color:var(--accent-gold);font-weight:600;border-bottom:1px dashed var(--glass-border-hover)}
+.form-group{margin-bottom:15px}
+.form-group label{display:block;font-size:12px;font-weight:600;margin-bottom:6px;color:var(--text-muted)}
+.form-group input,.form-group select,.form-group textarea{
+  width:100%;padding:13px 15px;border-radius:10px;
+  border:1px solid var(--glass-border);background:rgba(0,0,0,.35);
+  font-family:inherit;font-size:14px;color:var(--text-light);outline:none;
+  transition:border-color .2s;
+}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--accent-gold)}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.file-drop{
+  border:1.5px dashed var(--glass-border-hover);border-radius:14px;
+  padding:26px 20px;text-align:center;cursor:pointer;
+  transition:border-color .2s, background .2s;font-size:13.5px;color:var(--text-muted);
+}
+.file-drop:hover{border-color:var(--accent-gold);background:rgba(209,170,116,.06)}
+.file-drop b{color:var(--accent-gold);display:block;margin-bottom:5px;font-size:14.5px}
+.file-drop input{display:none}
+.file-preview{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+.file-preview img{width:64px;height:64px;object-fit:cover;border-radius:10px;border:1px solid var(--glass-border)}
+.form-agreement{display:flex;align-items:flex-start;gap:10px;margin:16px 0 18px;font-size:12px;color:var(--text-muted);line-height:1.45;cursor:pointer}
+.form-agreement input{margin-top:2px}
+.form-agreement a{color:var(--accent-gold)}
+.form-success{display:none;text-align:center;padding:40px 10px}
+.form-success h3{color:var(--accent-gold);font-size:22px;margin-bottom:12px}
+.form-success p{color:var(--text-muted);font-size:14.5px;max-width:380px;margin:0 auto 22px}
+
+/* Цены */
+.price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.price-card{
+  background:var(--glass-bg);border:1px solid var(--glass-border);
+  border-radius:20px;padding:30px 26px;text-align:center;
+  transition:border-color .3s, transform .3s;
+}
+.price-card:hover{border-color:var(--glass-border-hover);transform:translateY(-4px)}
+.price-card.featured{border-color:var(--accent-gold);background:rgba(209,170,116,.08)}
+.price-card .badge{
+  display:inline-block;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--accent-gold);border:1px solid var(--glass-border-hover);
+  border-radius:100px;padding:5px 14px;margin-bottom:16px;
+}
+.price-card h4{font-size:17px;margin-bottom:10px}
+.price-card .old{font-size:15px;color:var(--text-muted);text-decoration:line-through}
+.price-card .new{font-size:30px;font-weight:800;color:var(--accent-gold);margin:4px 0 10px}
+.price-card p{font-size:13px;color:var(--text-muted)}
+
+/* Работы */
+.works-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.works-grid figure{border-radius:18px;overflow:hidden;border:1px solid var(--glass-border);position:relative}
+.works-grid img{width:100%;height:300px;object-fit:cover;transition:transform .5s ease}
+.works-grid figure:hover img{transform:scale(1.05)}
+.works-grid figcaption{
+  position:absolute;left:0;right:0;bottom:0;padding:34px 18px 14px;
+  background:linear-gradient(transparent, rgba(20,9,7,.9));
+  font-size:12.5px;color:var(--text-muted);
+}
+.works-note{font-size:12.5px;color:var(--text-muted);margin-top:16px;text-align:center;opacity:.8}
+
+/* FAQ */
+.faq-list{max-width:820px;margin:0 auto;display:flex;flex-direction:column;gap:14px}
+.faq-item{background:var(--glass-bg);border:1px solid var(--glass-border);border-radius:16px;overflow:hidden;transition:border-color .3s}
+.faq-item.active{border-color:var(--accent-gold)}
+.faq-q{padding:20px 24px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-weight:600;font-size:15.5px;user-select:none}
+.faq-q .ic{width:26px;height:26px;border-radius:50%;background:rgba(209,170,116,.15);color:var(--accent-gold);display:flex;align-items:center;justify-content:center;font-size:18px;transition:transform .3s;flex-shrink:0;margin-left:14px}
+.faq-item.active .ic{transform:rotate(45deg);background:var(--accent-gold);color:var(--bg-deep)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .35s ease;padding:0 24px;color:var(--text-muted);font-size:14.5px}
+.faq-item.active .faq-a{padding:0 24px 20px}
+
+/* Финальный CTA */
+.final{
+  text-align:center;background:var(--glass-bg);border:1px solid var(--glass-border-hover);
+  border-radius:26px;padding:64px 30px;backdrop-filter:blur(12px);
+}
+.final h2{font-size:30px;font-weight:800;margin-bottom:14px}
+.final p{color:var(--text-muted);max-width:520px;margin:0 auto 30px;font-size:15.5px}
+
+/* Футер */
+footer{border-top:1px solid var(--glass-border);padding:44px 0;margin-top:60px;background:rgba(16,7,5,.88)}
+.footer-grid{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
+.footer-note{font-size:12.5px;color:var(--text-muted)}
+.footer-links{display:flex;gap:22px;font-size:13px;color:var(--text-muted)}
+.footer-links a:hover{color:var(--accent-gold)}
+
+/* Мобильная адаптация */
+@media (max-width:960px){
+  .hero-grid{grid-template-columns:1fr}
+  .hero-photo img{height:400px}
+  .pain-grid,.steps,.price-grid,.works-grid{grid-template-columns:1fr 1fr}
+  .honest-wrap,.verdict{grid-template-columns:1fr}
+  .verdict{padding:30px 24px}
+}
+@media (max-width:640px){
+  .hero{padding:120px 0 60px}
+  .hero h1{font-size:29px}
+  .sec-title{font-size:24px}
+  .pain-grid,.steps,.price-grid,.works-grid,.form-row{grid-template-columns:1fr}
+  .header-phone{display:none}
+  .section{padding:60px 0}
+  .final{padding:44px 22px}
+  .final h2{font-size:24px}
+  .photo-badge{left:12px}
+}
+</style>
+</head>
+<body>
+
+<!-- ======== Яндекс.Метрика (ID счётчика как на основном сайте) ======== -->
+<script>
+(function(m,e,t,r,i,k,a){
+m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0];
+k.async=1;k.src=r;a.parentNode.insertBefore(k,a)})
+(window,document,'script','https://mc.yandex.ru/metrika/tag.js','ym');
+ym(112725344,'init',{ssr:true,webvisor:true,clickmap:true,accurateTrackBounce:true,trackLinks:true});
+</script>
+
+<!-- ======================= ШАПКА ======================= -->
+<header class="header">
+  <div class="container header-inner">
+    <a class="logo" href="/">DIDI <span>PERMANENT</span></a>
+    <a class="header-phone" id="headerPhone" href="tel:+79023787080">Чебоксары · <b>+7 (902) 378-70-80</b></a>
+    <a href="#verdict" class="btn btn-sm">Вердикт по фото</a>
+  </div>
+</header>
+
+<!-- ======================= HERO ======================= -->
+<section class="hero">
+  <div class="container hero-grid">
+    <div>
+      <span class="eyebrow">Исправление · Чебоксары · Диана Емельянова</span>
+      <h1>Старый татуаж синеет<br>или выглядит как <span class="grad-text">маска?</span></h1>
+      <p class="hero-sub">
+        Пришлите фото — за <b>15 минут</b> скажу честно: ваш старый перманент можно
+        мягко перекрыть или уже пора его удалять. <b>Без обязательств, без записи,
+        без «да мы всё исправим».</b>
+      </p>
+      <div class="hero-cta">
+        <a href="#verdict" class="btn">Прислать фото для вердикта</a>
+        <a href="#prices" class="btn btn-ghost">Стоимость исправления</a>
+      </div>
+      <ul class="trust">
+        <li>Оценка по фото — бесплатно, вердикт приходит в ваш мессенджер</li>
+        <li>Если перекрывать нельзя — честно скажу и подскажу проверенного мастера по удалению</li>
+        <li>Берусь за исправление, только если гарантирую результат лучше текущего</li>
+      </ul>
+    </div>
+    <div class="hero-photo">
+      <img src="/1.jpg" alt="Результат исправления перманентного макияжа бровей">
+      <div class="photo-badge">
+        <b>Честный вердикт за 15 минут</b>
+        Оценю плотность, цвет и глубину старого пигмента по фото
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= БОЛЬ ======================= -->
+<section class="section">
+  <div class="container">
+    <div class="sec-head center">
+      <span class="sec-tag">Узнаёте себя?</span>
+      <h2 class="sec-title">Жить со старым татуажем — это каждый день</h2>
+      <p class="sec-sub">Если узнали себя хотя бы в двух пунктах — значит, проблема уже созрела, и она решаема.</p>
+    </div>
+    <div class="pain-grid">
+      <div class="pain-card"><span class="num">01</span><p>Брови посинели или посерели — «ниточки» из 2010-х, которые стали синими хвостиками.</p></div>
+      <div class="pain-card"><span class="num">02</span><p>Носите чёлку или волосы, чтобы скрывать форму бровей, которую давно хочется менять.</p></div>
+      <div class="pain-card"><span class="num">03</span><p>Каждое утро подрисовываете брови карандашом поверх старого пигмента, чтобы выглядеть нормально.</p></div>
+      <div class="pain-card"><span class="num">04</span><p>Губы стали неестественно красными или контур «поплыл» — приходится перекрывать помадой.</p></div>
+      <div class="pain-card"><span class="num">05</span><p>Асимметрия: одна бровь выше другой, и это заметно всем, кроме, кажется, только вас.</p></div>
+      <div class="pain-card"><span class="num">06</span><p>Стесняетесь близкого фото и откладываете поход к мастеру, потому что боитесь услышать «это не исправить».</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= ЧЕСТНОСТЬ ======================= -->
+<section class="section">
+  <div class="container">
+    <div class="sec-head center">
+      <span class="sec-tag">Главное отличие этого мастера</span>
+      <h2 class="sec-title">Скажу вам правду — даже невыгодную для меня</h2>
+      <p class="sec-sub">Неудачный перманент — это не всегда «перекрыть и забыть». Иногда честный ответ «удалять» экономит вам деньги и нервы.</p>
+    </div>
+    <div class="honest-wrap">
+      <div class="honest-col do">
+        <h3>Что я делаю</h3>
+        <ul>
+          <li><i>✦</i>Оцениваю остаток пигмента по фото: плотность, цвет, глубину и состояние кожи.</li>
+          <li><i>✦</i>Если пигмент посветлел — перекрываю тёплыми минеральными корректорами: убираю синеву и рисую новую форму.</li>
+          <li><i>✦</i>Исправляю асимметрию и форму даже там, где «по классике» боятся браться.</li>
+          <li><i>✦</i>Если нужно удаление — направляю к проверенному тату-мастеру и жду вас обратно на перекрытие.</li>
+          <li><i>✦</i>Берусь за работу, только если результат гарантированно будет лучше того, что есть сейчас.</li>
+        </ul>
+      </div>
+      <div class="honest-col dont">
+        <h3>Чего я НЕ делаю</h3>
+        <ul>
+          <li><i>✕</i>Не перекрываю плотный синий пигмент бежевым — получится грязное пятно, а не брови.</li>
+          <li><i>✕</i>Не обещаю «исправим любой перманент» — так обещают те, кому важен ваш чек, а не результат.</li>
+          <li><i>✕</i>Не начинаю работу без честного вердикта и вашего осознанного согласия на план.</li>
+          <li><i>✕</i>Не берусь за всё подряд: иногда правильный ответ — 1–2 сеанса удаления, а не слоёный пирог.</li>
+          <li><i>✕</i>Не скрываю, что перекрытие — это всегда работа в два этапа: основной сеанс + коррекция.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= ШАГИ ======================= -->
+<section class="section">
+  <div class="container">
+    <div class="sec-head center">
+      <span class="sec-tag">Как это работает</span>
+      <h2 class="sec-title">Экспресс-вердикт по фото — 3 шага, 15 минут</h2>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <h4>Присылаете фото</h4>
+        <p>Форма ниже или Telegram. Снимите брови/губы при дневном свете, без фильтров, анфас и вполоборота.</p>
+      </div>
+      <div class="step">
+        <h4>Я оцениваю пигмент</h4>
+        <p>Смотрю плотность остатка, цветовой оттенок, глубину залегания и состояние кожи. Это определяет, можно ли перекрывать.</p>
+      </div>
+      <div class="step">
+        <h4>Получаете честный ответ</h4>
+        <p>Вариант А: перекрываем мягким минеральным напылением. Вариант Б: сначала 1–2 сеанса удаления. С планом, сроками и ценой.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= ФОРМА ВЕРДИКТА ======================= -->
+<section class="section" id="verdict">
+  <div class="container">
+    <div class="verdict">
+      <div>
+        <h2>Пришлите фото — получите <span class="grad-text">честный вердикт</span> мастера</h2>
+        <p class="lead">Заполните форму и прикрепите фото старого перманента. В течение 15 минут (в рабочие часы) пришлю разбор: что можно сделать, сколько сеансов нужно и сколько это стоит.</p>
+        <ul class="verdict-perks">
+          <li>Бесплатно и без обязательств записываться</li>
+          <li>Вердикт приходит в Telegram или WhatsApp — как удобнее</li>
+          <li>Если фото не передаётся — напишите, я дам ссылку на прямой чат</li>
+        </ul>
+        <p class="tg-fallback">Удобнее в Telegram? Напишите сразу: <a class="js-tg-link" href="https://t.me/didi_permanent" target="_blank" rel="noopener">@didi_permanent</a> с пометкой «вердикт» и фото.</p>
+      </div>
+      <div>
+        <form id="verdictForm" novalidate>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="vName">Ваше имя</label>
+              <input type="text" id="vName" name="name" placeholder="Ирина" required>
+            </div>
+            <div class="form-group">
+              <label for="vPhone">Телефон</label>
+              <input type="tel" id="vPhone" name="phone" placeholder="+7 (___) ___-__-__" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="vMessenger">Куда прислать вердикт</label>
+            <select id="vMessenger" name="messenger">
+              <option>Telegram</option>
+              <option>WhatsApp</option>
+              <option>Звонок по телефону</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Фото старого перманента</label>
+            <label class="file-drop" for="vPhoto">
+              <b>Прикрепить фото</b>
+              Сделайте снимок при дневном свете, без фильтров.<br>Можно несколько.
+              <input type="file" id="vPhoto" accept="image/*" multiple>
+            </label>
+            <div class="file-preview" id="filePreview"></div>
+          </div>
+          <div class="form-group">
+            <label for="vComment">Что вас беспокоит (необязательно)</label>
+            <textarea id="vComment" name="comment" rows="2" placeholder="Например: брови делала 4 года назад, синеют у хвостиков…"></textarea>
+          </div>
+          <label class="form-agreement">
+            <input type="checkbox" required checked>
+            <span>Я даю согласие на обработку персональных данных и ознакомлен(а) с <a href="/policy.pdf" target="_blank">политикой конфиденциальности</a></span>
+          </label>
+          <button type="submit" class="btn" style="width:100%">Получить вердикт мастера</button>
+        </form>
+        <div class="form-success" id="formSuccess">
+          <h3>✓ Заявка отправлена</h3>
+          <p>Спасибо! В течение 15 минут в рабочие часы я пришлю разбор вашего случая. Если фото не прикрепилось — дублируйте его в Telegram.</p>
+          <a class="btn js-tg-link" href="https://t.me/didi_permanent" target="_blank" rel="noopener">Отправить фото в Telegram</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= ЦЕНЫ ======================= -->
+<section class="section" id="prices">
+  <div class="container">
+    <div class="sec-head center">
+      <span class="sec-tag">Прозрачные условия</span>
+      <h2 class="sec-title">Стоимость исправления</h2>
+      <p class="sec-sub">Точную цену называю после вердикта — она зависит от плотности старого пигмента и объёма работ.</p>
+    </div>
+    <div class="price-grid">
+      <div class="price-card featured">
+        <span class="badge">Шаг первый</span>
+        <h4>Экспресс-вердикт по фото</h4>
+        <div class="new">Бесплатно</div>
+        <p>Оценка пигмента, честный план: перекрытие / коррекция / удаление. Без обязательств.</p>
+      </div>
+      <div class="price-card">
+        <span class="badge">Если можно перекрыть</span>
+        <h4>Перекрытие старого перманента</h4>
+        <span class="old">5 000 ₽</span>
+        <div class="new">4 000 ₽</div>
+        <p>Минеральные корректоры убирают синеву, новая мягкая форма. Скидка действует при записи после вердикта.</p>
+      </div>
+      <div class="price-card">
+        <span class="badge">Через 30–45 дней</span>
+        <h4>Коррекция перекрытия</h4>
+        <div class="new">3 000 ₽</div>
+        <p>Финальное закрепление цвета и плотности — чтобы результат держался 1,5–2 года.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= РАБОТЫ ======================= -->
+<section class="section">
+  <div class="container">
+    <div class="sec-head center">
+      <span class="sec-tag">Доказательства</span>
+      <h2 class="sec-title">Результаты после исправлений</h2>
+      <p class="sec-sub">Свежие работы и фото после полного заживления — то, как перекрытие выглядит в жизни, а не только в кабинете.</p>
+    </div>
+    <div class="works-grid">
+      <!-- ЗАМЕНИТЕ: на реальные пары «до/после» исправлений. Пока подставлены фото с основного сайта. -->
+      <figure><img src="/5.jpg" alt="Пудровые брови после исправления"><figcaption>Перекрытие синего остатка · спустя 2 месяца после заживления</figcaption></figure>
+      <figure><img src="/7.jpg" alt="Форма бровей после коррекции"><figcaption>Исправление формы и асимметрии · результат после коррекции</figcaption></figure>
+      <figure><img src="/6.jpg" alt="Мягкий градиент бровей"><figcaption>Мягкое минеральное напыление поверх светлого остатка</figcaption></figure>
+    </div>
+    <p class="works-note">Хотите увидеть случай, похожий на ваш? Напишите в Telegram — пришлю фото работ с похожей исходной ситуацией.</p>
+  </div>
+</section>
+
+<!-- ======================= FAQ ======================= -->
+<section class="section">
+  <div class="container">
+    <div class="sec-head center">
+      <span class="sec-tag">Вопросы</span>
+      <h2 class="sec-title">Что спрашивают перед исправлением</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q">Правда, что старый татуаж можно только «выжигать» лазером?<span class="ic">+</span></div>
+        <div class="faq-a">Нет, не всегда. Если пигмент посветлел и лежит неглубоко, его можно перекрыть минеральными корректорами — уйдёт синевы, появится новая форма. Лазер нужен, когда пигмент плотный, глубокий или даёт сильный цветовой инверс. Вердикт по фото показывает, какой у вас случай.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Сколько сеансов нужно, чтобы исправить брови?<span class="ic">+</span></div>
+        <div class="faq-a">В большинстве случаев — основной сеанс перекрытия и коррекция через 30–45 дней. Если пигмент плотный, честный план — сначала 1–2 сеанса удаления, потом перекрытие. Именно поэтому я не называю «единую цену исправления» до просмотра фото.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">А вдруг станет ещё хуже, чем сейчас?<span class="ic">+</span></div>
+        <div class="faq-a">Этот страх — самый частый, и он справедливый. Поэтому я работаю по правилу: берусь только если гарантирую результат лучше текущего. Если не уверена — скажу прямо и не возьму деньги за эксперимент на вашем лице.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Перекрытие больно? Сколько длится процедура?<span class="ic">+</span></div>
+        <div class="faq-a">Нет. Используется двухэтапная местная анестезия, одноразовые картриджи. Сеанс длится около 2 часов: сначала согласовываем эскиз, только после вашего «да» начинаю работу. Если форма не нравится — процедуру не начинаем.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Что делать прямо сейчас, если я всё ещё сомневаюсь?<span class="ic">+</span></div>
+        <div class="faq-a">Пришлите фото на бесплатный вердикт. Это ни к чему не обязывает: вы получите честную картину своего случая и план с ценами — а решение принимаете спокойно, без давления.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= ФИНАЛЬНЫЙ CTA ======================= -->
+<section class="section" style="padding-top:20px">
+  <div class="container">
+    <div class="final">
+      <h2>Старый перманент — не <span class="grad-text">приговор</span></h2>
+      <p>Первый шаг — узнать правду о своём случае. Это бесплатно, занимает 15 минут и ни к чему не обязывает.</p>
+      <a href="#verdict" class="btn">Получить вердикт по фото — бесплатно</a>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= ФУТЕР ======================= -->
+<footer>
+  <div class="container footer-grid">
+    <a class="logo" href="/">DIDI <span>PERMANENT</span></a>
+    <div class="footer-links">
+      <a href="/#services">Услуги и цены</a>
+      <a href="/#works">Работы</a>
+      <a class="js-tg-link" href="https://t.me/didi_permanent" target="_blank" rel="noopener">Telegram</a>
+    </div>
+    <p class="footer-note">© 2026 Диана Емельянова · Перманентный макияж, Чебоксары</p>
+  </div>
+</footer>
+
+<script>
+/* =========================================================
+   НАСТРОЙКИ — ВСЁ МЕНЯЕТСЯ ЗДЕСЬ, В ОДНОМ МЕСТЕ.
+   Токен бота, chat_id, Google-таблица и CRM подставлены
+   из вашего основного сайта — менять не нужно.
+   ЗАМЕНИТЕ только телефон и ник Telegram ниже.
+   ========================================================= */
+const CONFIG = {
+  TG_BOT_TOKEN: '8848320511:AAEnpQx2Gw3mzngZyftz7z43xRI8XdCmZxE', // как на основном сайте
+  TG_CHAT_ID:   '637328406',                                        // как на основном сайте
+  GS_WEBHOOK:   'https://script.google.com/macros/s/AKfycbw_f4uuy2vN1oH5UpY2mfwDKk8ttLXxQGVFFss5NaOUqK6-hYGFEhn0UFi7ZEO_fL1I9A/exec',
+  SUPABASE_URL: 'https://kclezkfqmtsqnmgzrlts.supabase.co/rest/v1/leads',
+  SUPABASE_KEY: 'sb_publishable_RH1aTz0ktLo-euycIJFwmg_owmKt5TP',
+  PHONE_TEL:     '+79196584949',      // ЗАМЕНИТЕ: ваш номер для звонка (только цифры с +7)
+  PHONE_DISPLAY: '+7 (919) 658-49-49',// ЗАМЕНИТЕ: ваш номер как он выглядит на сайте
+  TG_USERNAME:   'didi_permanent'     // ЗАМЕНИТЕ: ваш ник в Telegram (без @)
+};
+
+/* Подставляем телефон и Telegram-ссылки из CONFIG */
+(function applyConfig(){
+  const hp = document.getElementById('headerPhone');
+  if(hp){
+    hp.href = 'tel:' + CONFIG.PHONE_TEL;
+    hp.innerHTML = 'Чебоксары · <b>' + CONFIG.PHONE_DISPLAY + '</b>';
+  }
+  document.querySelectorAll('.js-tg-link').forEach(a=>{
+    a.href = 'https://t.me/' + CONFIG.TG_USERNAME;
+    if(a.textContent.includes('@')) a.textContent = '@' + CONFIG.TG_USERNAME;
+  });
+})();
+
+/* Отправка текста в Telegram через серверный прокси Netlify (как на основном сайте) */
+async function sendToTelegram(text){
+  const r = await fetch(`/tg-api/bot${CONFIG.TG_BOT_TOKEN}/sendMessage`, {
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({chat_id:CONFIG.TG_CHAT_ID, text})
+  });
+  if(!r.ok) throw new Error('Telegram HTTP ' + r.status);
+}
+
+/* Отправка фото в Telegram через тот же прокси (не страшно, если не дойдёт — клиентка дублирует вручную) */
+async function sendPhotoToTelegram(file, caption){
+  const fd = new FormData();
+  fd.append('chat_id', CONFIG.TG_CHAT_ID);
+  fd.append('photo', file);
+  if(caption) fd.append('caption', caption);
+  await fetch(`/tg-api/bot${CONFIG.TG_BOT_TOKEN}/sendPhoto`, {method:'POST', body:fd});
+}
+
+/* Дублирование в Google Таблицу (как на основном сайте) */
+function sendToGoogleSheet(row){
+  fetch(CONFIG.GS_WEBHOOK, {
+    method:'POST', mode:'no-cors',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify(row)
+  }).catch(e=>console.warn('Google Sheet:', e));
+}
+
+/* Дублирование в CRM Supabase (как на основном сайте) */
+function sendToCRM(row){
+  fetch(CONFIG.SUPABASE_URL, {
+    method:'POST',
+    headers:{
+      'apikey':CONFIG.SUPABASE_KEY,
+      'Authorization':'Bearer ' + CONFIG.SUPABASE_KEY,
+      'Content-Type':'application/json',
+      'Prefer':'return=minimal'
+    },
+    body:JSON.stringify(row)
+  }).catch(e=>console.warn('CRM:', e));
+}
+
+const $ = (s, c=document) => c.querySelector(s);
+const $$ = (s, c=document) => [...c.querySelectorAll(s)];
+
+/* ---- UTM-метки: сохраняем, чтобы понимать, откуда заявка ---- */
+(function captureUTM(){
+  const p = new URLSearchParams(location.search);
+  const utm = {};
+  ['utm_source','utm_medium','utm_campaign','utm_content','utm_term'].forEach(k=>{
+    if(p.get(k)) utm[k]=p.get(k);
+  });
+  if(Object.keys(utm).length) localStorage.setItem('didi_utm', JSON.stringify(utm));
+})();
+
+/* ---- Цель: клик по CTA-кнопкам в hero ---- */
+$$('.hero-cta .btn, .final .btn').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    if(window.ym) ym(112725344,'reachGoal','cta_verdict_click');
+  });
+});
+
+/* ---- Превью загруженных фото ---- */
+const fileInput = $('#vPhoto');
+const preview = $('#filePreview');
+fileInput.addEventListener('change', ()=>{
+  preview.innerHTML = '';
+  [...fileInput.files].slice(0,5).forEach(f=>{
+    const img = document.createElement('img');
+    img.src = URL.createObjectURL(f);
+    img.alt = f.name;
+    preview.appendChild(img);
+  });
+  if(window.ym) ym(112725344,'reachGoal','photo_attached');
+});
+
+/* ---- Маска телефона ---- */
+$('#vPhone').addEventListener('input', e=>{
+  let v = e.target.value.replace(/\D/g,'');
+  if(v.startsWith('8')) v = '7'+v.slice(1);
+  if(!v.startsWith('7')) v = '7'+v;
+  v = v.slice(0,11);
+  const p = v.match(/(\d)(\d{0,3})(\d{0,3})(\d{0,2})(\d{0,2})/);
+  e.target.value = p ? `+7${p[2]?' ('+p[2]:''}${p[3]?') '+p[3]:''}${p[4]?'-'+p[4]:''}${p[5]?'-'+p[5]:''}` : '';
+});
+
+/* ---- FAQ аккордеон ---- */
+$$('.faq-item').forEach(item=>{
+  item.querySelector('.faq-q').addEventListener('click', ()=>{
+    const open = item.classList.contains('active');
+    $$('.faq-item.active').forEach(i=>{
+      i.classList.remove('active');
+      i.querySelector('.faq-a').style.maxHeight = null;
+    });
+    if(!open){
+      item.classList.add('active');
+      const a = item.querySelector('.faq-a');
+      a.style.maxHeight = a.scrollHeight + 'px';
+    }
+  });
+});
+
+/* ---- Отправка формы ---- */
+$('#verdictForm').addEventListener('submit', async e=>{
+  e.preventDefault();
+  const form = e.target;
+  if(!form.checkValidity()){ form.reportValidity(); return; }
+  const btn = form.querySelector('button[type=submit]');
+  btn.disabled = true; btn.textContent = 'Отправляем…';
+
+  const name = $('#vName').value.trim();
+  const phone = $('#vPhone').value.trim();
+  const messenger = $('#vMessenger').value;
+  const comment = $('#vComment').value.trim();
+  const photos = fileInput.files ? [...fileInput.files] : [];
+  let utm = {};
+  try{ utm = JSON.parse(localStorage.getItem('didi_utm')||'{}'); }catch(_){}
+
+  const messageText =
+`🔥 ЗАЯВКА — ВЕРДИКТ ПО ФОТО (/perekratie/)
+
+👤 Имя: ${name}
+📞 Телефон: ${phone}
+💬 Куда ответить: ${messenger}
+📎 Фото прикреплено: ${photos.length} шт.
+📝 Комментарий: ${comment || '—'}
+🔗 UTM: ${utm.utm_content || '—'} / ${utm.utm_campaign || '—'}`;
+
+  try{
+    await sendToTelegram(messageText);
+    // Фото идут отдельными сообщениями следом
+    for(const f of photos.slice(0,5)){
+      try{ await sendPhotoToTelegram(f, `Фото от ${name} (${phone})`); }catch(_){}
+    }
+    sendToGoogleSheet({
+      name, phone,
+      service: 'Вердикт по фото — исправление татуажа',
+      details: `Страница: /perekratie/; Фото: ${photos.length} шт.; Комментарий: ${comment||'—'}; UTM: ${JSON.stringify(utm)}`,
+      contactMethod: messenger
+    });
+    sendToCRM({
+      name, phone,
+      service_title: 'Вердикт по фото — исправление татуажа',
+      comment: `Страница: /perekratie/; Фото: ${photos.length} шт.; ${comment||''} UTM: ${JSON.stringify(utm)}`
+    });
+    form.style.display='none';
+    $('#formSuccess').style.display='block';
+    if(window.ym) ym(112725344,'reachGoal','photo_verdict_sent');
+    if(window.ym) ym(112725344,'reachGoal','lead_sent');
+  }catch(err){
+    console.warn(err);
+    btn.disabled=false; btn.textContent='Получить вердикт мастера';
+    alert('Не получилось отправить автоматически. Напишите мне напрямую в Telegram — кнопка под формой.');
+  }
+});
+</script>
+</body>
+</html>
